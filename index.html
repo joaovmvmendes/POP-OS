@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fluxo de Abertura de OS — Documentação</title>
+
+  <style>
+    :root{
+      --bg:#F8FAFC;
+      --card:#FFFFFF;
+      --text:#111827;
+      --muted:#6B7280;
+      --border:#E5E7EB;
+      --soft:#F9FAFB;
+
+      --ok-bg:#F0FDF4;
+      --ok-bd:#A7F3D0;
+      --ok-tx:#065F46;
+
+      --warn-bg:#FFFBEB;
+      --warn-bd:#FCD34D;
+      --warn-tx:#78350F;
+
+      --err-bg:#FEF2F2;
+      --err-bd:#FECACA;
+      --err-tx:#7F1D1D;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height:1.6;
+    }
+
+    .wrap{
+      width:100%;
+      padding:28px 14px;
+      text-align:center;
+    }
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      text-align:left;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .card + .card{ margin-top:16px; }
+
+    .header{
+      padding:22px;
+    }
+
+    .title{
+      font-size:24px;
+      font-weight:700;
+      margin:0;
+    }
+    .subtitle{
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .badges{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      background:var(--soft);
+      border-radius:999px;
+      color:#374151;
+      white-space:nowrap;
+    }
+    .badge-ok{
+      border-color:var(--ok-bd);
+      background:var(--ok-bg);
+      color:var(--ok-tx);
+      font-weight:700;
+    }
+
+    .toc{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .toc a{
+      text-decoration:none;
+      color:#374151;
+      border:1px solid var(--border);
+      background:var(--soft);
+      border-radius:10px;
+      padding:8px 10px;
+      font-size:12px;
+      display:inline-block;
+    }
+    .toc a:hover{ background:#F3F4F6; }
+
+    .h2{
+      font-size:18px;
+      font-weight:700;
+      margin:0 0 8px 0;
+    }
+    .h3{
+      font-size:14px;
+      font-weight:700;
+      margin:14px 0 6px;
+    }
+    .muted{ color:var(--muted); font-size:13px; }
+
+    .note{
+      border:1px solid var(--border);
+      background:var(--soft);
+      border-left:4px solid #D1D5DB;
+      border-radius:10px;
+      padding:12px;
+      font-size:13px;
+      color:#374151;
+      margin-top:12px;
+    }
+    .note code{
+      font-family: Consolas, Monaco, monospace;
+      font-size:12px;
+    }
+
+    .callout-warn{
+      border:1px solid var(--warn-bd);
+      background:var(--warn-bg);
+      color:var(--warn-tx);
+      border-radius:12px;
+      padding:16px;
+      margin-top:16px;
+    }
+    .callout-warn .h2{ color:#92400E; }
+
+    .callout-err{
+      border:1px solid var(--err-bd);
+      background:var(--err-bg);
+      color:var(--err-tx);
+      border-radius:12px;
+      padding:16px;
+      margin-top:16px;
+    }
+    .callout-err .h2{ color:#991B1B; }
+
+    ul,ol{ margin:8px 0 0; padding-left:18px; }
+    li{ margin:4px 0; }
+
+    .step-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--soft);
+      color:#374151;
+    }
+
+    .imgbox{
+      margin-top:12px;
+      padding:12px;
+      border:1px dashed #D1D5DB;
+      border-radius:10px;
+      background:#fff;
+    }
+    .imgbox .cap{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:8px;
+    }
+    .imgbox img{
+      width:100%;
+      height:auto;
+      border:1px solid var(--border);
+      border-radius:10px;
+      display:block;
+    }
+
+    .footer{
+      margin-top:18px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="container">
+
+      <!-- HEADER -->
+      <div class="card header" id="top">
+        <h1 class="title">Fluxo de Abertura de Ordem de Serviço (OS)</h1>
+        <div class="subtitle">
+          Documentação operacional completa do processo de solicitação, avaliação de urgência, briefing, orçamento, aprovação e encerramento.
+        </div>
+
+        <div class="badges">
+          <span class="badge"><b>Canal:</b> Feed Bitrix24</span>
+          <span class="badge"><b>Origem:</b> Fluxos de Trabalho</span>
+          <span class="badge"><b>Destino:</b> SPA Única de OS</span>
+          <span class="badge"><b>Governança:</b> Processo automatizado</span>
+          <span class="badge badge-ok">Ativo</span>
+        </div>
+
+        <div class="h3">Navegação rápida</div>
+        <div class="toc">
+          <a href="#visao-geral">Visão geral</a>
+          <a href="#etapa-1">Etapa 1</a>
+          <a href="#etapa-2">Etapa 2</a>
+          <a href="#etapa-3">Etapa 3 (Urgência)</a>
+          <a href="#etapa-4">Etapa 4</a>
+          <a href="#etapa-5">Etapa 5</a>
+          <a href="#etapa-6">Etapa 6</a>
+          <a href="#etapa-7">Etapa 7</a>
+          <a href="#etapa-8">Etapa 8</a>
+          <a href="#etapa-9">Etapa 9</a>
+          <a href="#identificacao">Identificação</a>
+          <a href="#regras">Regras críticas</a>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+          <b>Como adicionar imagens:</b> salve os arquivos na mesma pasta deste <code>index.html</code> com nome exato <code>Imagem 1</code>, <code>Imagem 2</code>… (com extensão .png ou .jpg/.jpeg).  
+          Este HTML tenta automaticamente: <code>.png</code> → <code>.jpg</code> → <code>.jpeg</code>.
+        </div>
+      </div>
+
+      <!-- VISÃO GERAL -->
+      <div class="card" id="visao-geral">
+        <div class="h2">Visão geral do processo</div>
+        <div class="muted">
+          O processo padroniza a criação de Ordens de Serviço entre unidades de negócio, garantindo rastreabilidade,
+          clareza de responsabilidades, formalização de briefing e controle de orçamento antes de qualquer execução.
+        </div>
+
+        <div class="h3">Entidades envolvidas</div>
+        <ul>
+          <li><b>Solicitante:</b> unidade que abre a OS e fornece as informações de demanda.</li>
+          <li><b>Unidade Prestadora:</b> unidade que analisa, define briefing, elabora orçamento e executa após aprovação.</li>
+          <li><b>Aprovador de urgência:</b> Dr. Roberto Régis (somente em OS marcadas como Urgentes).</li>
+          <li><b>Responsável da unidade solicitante:</b> aprova/recusa o orçamento.</li>
+        </ul>
+
+        <div class="h3">Resultado esperado</div>
+        <ul>
+          <li>OS registrada na <b>SPA Única</b>, com informações completas.</li>
+          <li>Se aplicável: urgência avaliada, briefing registrado, orçamento formalizado.</li>
+          <li>Execução autorizada <b>apenas após aprovação final do orçamento</b>.</li>
+        </ul>
+      </div>
+
+      <!-- ETAPA 1 -->
+      <div class="card" id="etapa-1">
+        <div class="h2">Etapa 1 — Início da solicitação (Solicitante)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Solicitante</span>
+          <span class="pill"><b>Canal:</b> Feed → Fluxos de Trabalho</span>
+          <span class="pill"><b>Saída:</b> Formulário da OS aberto</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          O solicitante acessa o fluxo “Realizar solicitação de OS” no Feed e inicia o processo formal de abertura.
+        </div>
+
+        <div class="h3">Como prosseguir (passo a passo)</div>
+        <ol>
+          <li>Acessar o <b>Feed</b></li>
+          <li>Clicar em <b>Mais</b> → <b>Fluxos de Trabalho</b></li>
+          <li>Procurar <b>“Realizar solicitação de OS”</b></li>
+          <li>Clicar em <b>Iniciar</b></li>
+          <li>Na tela seguinte, clicar em <b>Próximo</b></li>
+        </ol>
+
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 1 -->
+        <div class="imgbox">
+          <img
+            src="Imagem%201.png"
+            alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS"
+            onerror="this.onerror=null;this.src='Imagem%201.jpg';this.onerror=function(){this.src='Imagem%201.jpeg';}"
+          >
+          <div class="cap">Imagem 1 — Exemplo: acesso ao fluxo “Realizar solicitação de OS”</div>
+        </div>
+
+        <!-- Imagem 2 -->
+        <div class="imgbox">
+          <img
+            src="Imagem%202.png"
+            alt="Imagem 2 — Tela inicial do fluxo (Próximo)"
+            onerror="this.onerror=null;this.src='Imagem%202.jpg';this.onerror=function(){this.src='Imagem%202.jpeg';}"
+          >
+          <div class="cap">Imagem 2 — Exemplo: tela inicial do fluxo (botão Próximo)</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 2 -->
+      <div class="card" id="etapa-2">
+        <div class="h2">Etapa 2 — Preenchimento da solicitação (Solicitante)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Solicitante</span>
+          <span class="pill"><b>Entrada:</b> Formulário aberto</span>
+          <span class="pill"><b>Saída:</b> Solicitação iniciada</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          O solicitante fornece os dados necessários para que a unidade prestadora entenda objetivo, justificativa,
+          escopo e evidências (anexos). O correto preenchimento é crítico, pois o fluxo não pode ser reiniciado.
+        </div>
+
+        <div class="h3">Campos e orientações</div>
+        <ul>
+          <li><b>Solicitante:</b> sua unidade de negócio.</li>
+          <li><b>Tipo de serviço:</b> <b>Programado</b> (prazo maior) ou <b>Urgente</b> (gera avaliação de urgência).</li>
+          <li><b>Expectativa de prazo para entrega:</b> data que você espera a entrega.</li>
+          <li><b>Prestador:</b> unidade de negócio que prestará o serviço.</li>
+          <li><b>Tipo de OS:</b> <b>Interna</b> (entre unidades) ou <b>Externa</b> (representando cliente externo).</li>
+          <li><b>Cliente Externo:</b> obrigatório se Tipo de OS = Externa.</li>
+          <li><b>Objetivo:</b> resultado final esperado (ex.: “sistema de abertura de OS completo”).</li>
+          <li><b>Justificativa:</b> motivo do pedido (ex.: necessidade de negociação/valores de prestação de serviço).</li>
+          <li><b>Descrição:</b> detalhes técnicos/funcionais (ex.: níveis de acesso, regras, escopo).</li>
+          <li><b>Anexos:</b> arquivos de apoio (prints, documentos, especificações).</li>
+        </ul>
+
+        <div class="h3">Como prosseguir</div>
+        <div class="muted">Após preencher todos os campos, clicar em <b>Iniciar</b>.</div>
+
+        <!-- Imagem 3 -->
+        <div class="imgbox">
+          <img
+            src="Imagem%203.png"
+            alt="Imagem 3 — Formulário preenchido"
+            onerror="this.onerror=null;this.src='Imagem%203.jpg';this.onerror=function(){this.src='Imagem%203.jpeg';}"
+          >
+          <div class="cap">Imagem 3 — Exemplo: formulário de solicitação preenchido</div>
+        </div>
+
+        <div class="note">
+          <b>Regra:</b> Se o Tipo de Serviço NÃO for Urgente, o fluxo segue diretamente para a <b>verificação de briefing</b>.
+        </div>
+      </div>
+
+      <!-- ETAPA 3 (URGÊNCIA) -->
+      <div class="callout-warn" id="etapa-3">
+        <div class="h2">Etapa 3 — Avaliação de urgência (somente quando Tipo de Serviço = Urgente)</div>
+
+        <div class="step-meta" style="margin-top:10px;">
+          <span class="pill"><b>Papel:</b> Aprovador de urgência</span>
+          <span class="pill"><b>Responsável:</b> Dr. Roberto Régis</span>
+          <span class="pill"><b>Saída:</b> Urgência aprovada ou recusada</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted" style="color:var(--warn-tx);">
+          Ao definir o Tipo de Serviço como <b>Urgente</b>, a solicitação é encaminhada para avaliação do Dr. Roberto Régis,
+          que decide se a urgência é necessária.
+        </div>
+
+        <div class="h3">Decisão e consequências</div>
+        <ul>
+          <li><b>Se aprovada:</b> o fluxo segue normalmente para a unidade prestadora.</li>
+          <li><b>Se recusada:</b> o card da SPA vai para a raia <b>“Ordem de urgência recusada”</b> e o fluxo é encerrado.</li>
+          <li><b>Obrigatório na recusa:</b> preencher o campo <b>“Motivo da recusa da OS”</b>.</li>
+        </ul>
+
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagens 4 a 8 (conforme seu texto) -->
+        <div class="imgbox">
+          <img
+            src="Imagem%204.png"
+            alt="Imagem 4 — Notificação ao solicitante ao abrir OS urgente"
+            onerror="this.onerror=null;this.src='Imagem%204.jpg';this.onerror=function(){this.src='Imagem%204.jpeg';}"
+          >
+          <div class="cap">Imagem 4 — Exemplo: notificação ao solicitante (OS urgente)</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%205.png"
+            alt="Imagem 5 — Fluxo de aprovação de urgência no feed do aprovador"
+            onerror="this.onerror=null;this.src='Imagem%205.jpg';this.onerror=function(){this.src='Imagem%205.jpeg';}"
+          >
+          <div class="cap">Imagem 5 — Exemplo: fluxo de aprovação de urgência no feed do aprovador</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%206.png"
+            alt="Imagem 6 — Aprovação ou recusa (com motivo obrigatório na recusa)"
+            onerror="this.onerror=null;this.src='Imagem%206.jpg';this.onerror=function(){this.src='Imagem%206.jpeg';}"
+          >
+          <div class="cap">Imagem 6 — Exemplo: aprovação/recusa (motivo obrigatório na recusa)</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%207.png"
+            alt="Imagem 7 — Notificação ao solicitante informando recusa e anotações"
+            onerror="this.onerror=null;this.src='Imagem%207.jpg';this.onerror=function(){this.src='Imagem%207.jpeg';}"
+          >
+          <div class="cap">Imagem 7 — Exemplo: notificação ao solicitante (recusa + “Anotações” com motivo)</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%208.png"
+            alt="Imagem 8 — Mensagem ao solicitante informando recusa e anotações"
+            onerror="this.onerror=null;this.src='Imagem%208.jpg';this.onerror=function(){this.src='Imagem%208.jpeg';}"
+          >
+          <div class="cap">Imagem 8 — Exemplo: mensagem ao solicitante (recusa + “Anotações” com motivo)</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 4 -->
+      <div class="card" id="etapa-4">
+        <div class="h2">Etapa 4 — Verificação de necessidade de briefing (Unidade Prestadora)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
+          <span class="pill"><b>Entrada:</b> OS criada/encaminhada</span>
+          <span class="pill"><b>Saída:</b> Precisa ou não precisa briefing</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          Após aprovação de urgência (ou quando a OS não é urgente), o solicitante é informado que a OS está
+          em verificação para determinar se será necessário um briefing (reunião) para eliminar dúvidas e lacunas.
+        </div>
+
+        <div class="h3">Como prosseguir (Unidade Prestadora)</div>
+        <ul>
+          <li>Acessar o fluxo no Feed.</li>
+          <li>Tomar a decisão: <b>PRECISA DE BRIEFING</b> ou <b>NÃO PRECISA</b>.</li>
+          <li><b>Se PRECISA DE BRIEFING:</b> informar obrigatoriamente o motivo (o solicitante será notificado).</li>
+        </ul>
+
+        <div class="note">
+          <b>Responsabilidade operacional:</b> se precisar briefing, o responsável da unidade prestadora deve contatar o solicitante para combinar agenda.
+        </div>
+
+        <!-- Imagens 9 a 16 conforme seu texto -->
+        <div class="imgbox">
+          <img
+            src="Imagem%209.png"
+            alt="Imagem 9 — Notificação ao solicitante sobre necessidade de briefing"
+            onerror="this.onerror=null;this.src='Imagem%209.jpg';this.onerror=function(){this.src='Imagem%209.jpeg';}"
+          >
+          <div class="cap">Imagem 9 — Exemplo: notificação ao solicitante sobre necessidade de briefing</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2010.png"
+            alt="Imagem 10 — Mensagem ao solicitante sobre necessidade de briefing"
+            onerror="this.onerror=null;this.src='Imagem%2010.jpg';this.onerror=function(){this.src='Imagem%2010.jpeg';}"
+          >
+          <div class="cap">Imagem 10 — Exemplo: mensagem ao solicitante sobre necessidade de briefing</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2011.png"
+            alt="Imagem 11 — Notificação ao prestador para verificar briefing"
+            onerror="this.onerror=null;this.src='Imagem%2011.jpg';this.onerror=function(){this.src='Imagem%2011.jpeg';}"
+          >
+          <div class="cap">Imagem 11 — Exemplo: notificação ao prestador para verificação de briefing</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2012.png"
+            alt="Imagem 12 — Mensagem ao prestador para verificar briefing"
+            onerror="this.onerror=null;this.src='Imagem%2012.jpg';this.onerror=function(){this.src='Imagem%2012.jpeg';}"
+          >
+          <div class="cap">Imagem 12 — Exemplo: mensagem ao prestador para verificação de briefing</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2013.png"
+            alt="Imagem 13 — Fluxo no feed para verificação de briefing"
+            onerror="this.onerror=null;this.src='Imagem%2013.jpg';this.onerror=function(){this.src='Imagem%2013.jpeg';}"
+          >
+          <div class="cap">Imagem 13 — Exemplo: fluxo no feed para verificação de briefing</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2014.png"
+            alt="Imagem 14 — Decisão precisa ou não precisa briefing (motivo obrigatório ao precisar)"
+            onerror="this.onerror=null;this.src='Imagem%2014.jpg';this.onerror=function(){this.src='Imagem%2014.jpeg';}"
+          >
+          <div class="cap">Imagem 14 — Exemplo: decisão de briefing (motivo obrigatório ao selecionar “PRECISA DE BRIEFING”)</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2015.png"
+            alt="Imagem 15 — Notificação ao solicitante caso exista necessidade de briefing"
+            onerror="this.onerror=null;this.src='Imagem%2015.jpg';this.onerror=function(){this.src='Imagem%2015.jpeg';}"
+          >
+          <div class="cap">Imagem 15 — Exemplo: notificação ao solicitante (briefing necessário)</div>
+        </div>
+
+        <div class="imgbox">
+          <img
+            src="Imagem%2016.png"
+            alt="Imagem 16 — Mensagem ao solicitante caso exista necessidade de briefing"
+            onerror="this.onerror=null;this.src='Imagem%2016.jpg';this.onerror=function(){this.src='Imagem%2016.jpeg';}"
+          >
+          <div class="cap">Imagem 16 — Exemplo: mensagem ao solicitante (briefing necessário)</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 5 -->
+      <div class="card" id="etapa-5">
+        <div class="h2">Etapa 5 — Marcação da reunião de briefing (Unidade Prestadora)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
+          <span class="pill"><b>Ação:</b> Marcar reunião no fluxo</span>
+          <span class="pill"><b>Saída:</b> Reunião criada e solicitante notificado</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          Após selecionar “PRECISA DE BRIEFING”, o fluxo é atualizado e passa a solicitar os dados da reunião.
+          O card permanece aguardando continuidade no Feed.
+        </div>
+
+        <div class="h3">Como prosseguir</div>
+        <ul>
+          <li>Preencher <b>data/hora de início</b> e <b>data/hora de término</b>.</li>
+          <li>Selecionar <b>participantes</b>.</li>
+          <li>Informar <b>local</b> (recomendado: “Online” ou “Presencial”).</li>
+          <li>Clicar em <b>MARCAR REUNIÃO</b>.</li>
+        </ul>
+
+        <div class="note">
+          <b>Importante:</b> o campo de local é ilustrativo e não sincroniza automaticamente com reservas de sala.
+          Se presencial, reserve a sala manualmente após marcar a reunião.
+        </div>
+
+        <!-- Imagens 17 a 21 -->
+        <div class="imgbox">
+          <img src="Imagem%2017.png" alt="Imagem 17" onerror="this.onerror=null;this.src='Imagem%2017.jpg';this.onerror=function(){this.src='Imagem%2017.jpeg';}">
+          <div class="cap">Imagem 17 — Exemplo: fluxo ainda no feed após selecionar “PRECISA DE BRIEFING”</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2018.png" alt="Imagem 18" onerror="this.onerror=null;this.src='Imagem%2018.jpg';this.onerror=function(){this.src='Imagem%2018.jpeg';}">
+          <div class="cap">Imagem 18 — Exemplo: tela do fluxo atualizada para marcar reunião</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2019.png" alt="Imagem 19" onerror="this.onerror=null;this.src='Imagem%2019.jpg';this.onerror=function(){this.src='Imagem%2019.jpeg';}">
+          <div class="cap">Imagem 19 — Exemplo: notificação ao solicitante com dados da reunião</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2020.png" alt="Imagem 20" onerror="this.onerror=null;this.src='Imagem%2020.jpg';this.onerror=function(){this.src='Imagem%2020.jpeg';}">
+          <div class="cap">Imagem 20 — Exemplo: mensagem ao solicitante com dados da reunião</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2021.png" alt="Imagem 21" onerror="this.onerror=null;this.src='Imagem%2021.jpg';this.onerror=function(){this.src='Imagem%2021.jpeg';}">
+          <div class="cap">Imagem 21 — Exemplo: reunião criada para tratar do briefing</div>
+        </div>
+
+        <div class="note">
+          Após marcar, a tela pode atualizar para uma próxima etapa que depende de informações que você só terá após a reunião.
+          Você pode fechar o fluxo e retornar depois.
+        </div>
+      </div>
+
+      <!-- ETAPA 6 -->
+      <div class="card" id="etapa-6">
+        <div class="h2">Etapa 6 — Preenchimento das informações para orçamento (Unidade Prestadora)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
+          <span class="pill"><b>Entrada:</b> Briefing realizado</span>
+          <span class="pill"><b>Saída:</b> Orçamento gerado</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          O responsável da unidade prestadora recebe notificação/mensagem para preencher dados que permitirão gerar o orçamento.
+          O orçamento é então enviado ao responsável da unidade solicitante para aprovação/recusa.
+        </div>
+
+        <div class="h3">Como preencher (critérios)</div>
+        <ul>
+          <li><b>Executor(es):</b> quem executará a OS.</li>
+          <li><b>Data de conclusão:</b> prazo <b>realista</b> (data e hora), mesmo que diferente da expectativa do solicitante.</li>
+          <li><b>Produto:</b> selecione se existir 1 produto mapeado.</li>
+          <li><b>Produto personalizado:</b> se houver múltiplos produtos, deixe “Produto” em branco e liste todos aqui.</li>
+          <li><b>Valor:</b> total final da OS.</li>
+          <li><b>Detalhes dos entregáveis:</b> detalhamento completo, produtos, quantidades e composição dos valores.</li>
+        </ul>
+
+        <div class="h3">Como prosseguir</div>
+        <div class="muted">Após preencher, clicar em <b>Atribuir detalhes</b>.</div>
+
+        <!-- Imagens 22 a 25 -->
+        <div class="imgbox">
+          <img src="Imagem%2022.png" alt="Imagem 22" onerror="this.onerror=null;this.src='Imagem%2022.jpg';this.onerror=function(){this.src='Imagem%2022.jpeg';}">
+          <div class="cap">Imagem 22 — Exemplo: notificação ao prestador para inserir informações do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2023.png" alt="Imagem 23" onerror="this.onerror=null;this.src='Imagem%2023.jpg';this.onerror=function(){this.src='Imagem%2023.jpeg';}">
+          <div class="cap">Imagem 23 — Exemplo: mensagem ao prestador para inserir informações do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2024.png" alt="Imagem 24" onerror="this.onerror=null;this.src='Imagem%2024.jpg';this.onerror=function(){this.src='Imagem%2024.jpeg';}">
+          <div class="cap">Imagem 24 — Exemplo: fluxo no feed aguardando preenchimento do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2025.png" alt="Imagem 25" onerror="this.onerror=null;this.src='Imagem%2025.jpg';this.onerror=function(){this.src='Imagem%2025.jpeg';}">
+          <div class="cap">Imagem 25 — Exemplo: tela para preenchimento do orçamento</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 7 -->
+      <div class="card" id="etapa-7">
+        <div class="h2">Etapa 7 — Aprovação/recusa do orçamento (Responsável da unidade solicitante)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Solicitante (responsável)</span>
+          <span class="pill"><b>Ação:</b> Aprovar ou recusar</span>
+          <span class="pill"><b>Saída:</b> Aprovado ou devolvido para nova proposta</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          O responsável pela unidade solicitante recebe o orçamento e decide aprovar ou recusar.  
+          Em caso de recusa, é obrigatório informar o motivo.
+        </div>
+
+        <div class="h3">Como prosseguir</div>
+        <ul>
+          <li>Revisar valor, prazos, entregáveis e condições.</li>
+          <li>Selecionar <b>Aprovar</b> ou <b>Recusar</b>.</li>
+          <li><b>Se recusar:</b> preencher obrigatoriamente “Por qual motivo está recusando?”.</li>
+        </ul>
+
+        <!-- Imagens 26 a 29 -->
+        <div class="imgbox">
+          <img src="Imagem%2026.png" alt="Imagem 26" onerror="this.onerror=null;this.src='Imagem%2026.jpg';this.onerror=function(){this.src='Imagem%2026.jpeg';}">
+          <div class="cap">Imagem 26 — Exemplo: notificação ao responsável solicitante para aprovação do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2027.png" alt="Imagem 27" onerror="this.onerror=null;this.src='Imagem%2027.jpg';this.onerror=function(){this.src='Imagem%2027.jpeg';}">
+          <div class="cap">Imagem 27 — Exemplo: mensagem ao responsável solicitante para aprovação do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2028.png" alt="Imagem 28" onerror="this.onerror=null;this.src='Imagem%2028.jpg';this.onerror=function(){this.src='Imagem%2028.jpeg';}">
+          <div class="cap">Imagem 28 — Exemplo: fluxo no feed para aprovação/recusa do orçamento</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2029.png" alt="Imagem 29" onerror="this.onerror=null;this.src='Imagem%2029.jpg';this.onerror=function(){this.src='Imagem%2029.jpeg';}">
+          <div class="cap">Imagem 29 — Exemplo: tela de aprovação/recusa (motivo obrigatório em recusa)</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 8 -->
+      <div class="card" id="etapa-8">
+        <div class="h2">Etapa 8 — Recusa do orçamento: nova proposta ou cancelamento (Unidade Prestadora)</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
+          <span class="pill"><b>Entrada:</b> Orçamento recusado</span>
+          <span class="pill"><b>Saída:</b> Nova proposta enviada ou negociação cancelada</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          Se houver recusa, a unidade prestadora recebe os detalhes e pode:
+          (1) enviar nova proposta; ou (2) cancelar a negociação.
+        </div>
+
+        <div class="note">
+          <b>Obrigatório ao reenviar:</b> preencher “Explique quais foram as mudanças na sua proposta!”.
+          O sistema reprocesa e volta ao fluxo de aprovação do solicitante.
+        </div>
+
+        <!-- Imagens 30 a 34 -->
+        <div class="imgbox">
+          <img src="Imagem%2030.png" alt="Imagem 30" onerror="this.onerror=null;this.src='Imagem%2030.jpg';this.onerror=function(){this.src='Imagem%2030.jpeg';}">
+          <div class="cap">Imagem 30 — Exemplo: notificação de recusa para a unidade prestadora</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2031.png" alt="Imagem 31" onerror="this.onerror=null;this.src='Imagem%2031.jpg';this.onerror=function(){this.src='Imagem%2031.jpeg';}">
+          <div class="cap">Imagem 31 — Exemplo: mensagem de recusa para a unidade prestadora</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2032.png" alt="Imagem 32" onerror="this.onerror=null;this.src='Imagem%2032.jpg';this.onerror=function(){this.src='Imagem%2032.jpeg';}">
+          <div class="cap">Imagem 32 — Exemplo: fluxo no feed para envio de nova proposta</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2033.png" alt="Imagem 33" onerror="this.onerror=null;this.src='Imagem%2033.jpg';this.onerror=function(){this.src='Imagem%2033.jpeg';}">
+          <div class="cap">Imagem 33 — Exemplo: tela para ajustar proposta e reenviar orçamento (mudanças obrigatórias)</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2034.png" alt="Imagem 34" onerror="this.onerror=null;this.src='Imagem%2034.jpg';this.onerror=function(){this.src='Imagem%2034.jpeg';}">
+          <div class="cap">Imagem 34 — Exemplo: orçamento gerado após reprocessamento</div>
+        </div>
+      </div>
+
+      <!-- ETAPA 9 -->
+      <div class="card" id="etapa-9">
+        <div class="h2">Etapa 9 — Aprovação final e encerramento do fluxo</div>
+        <div class="step-meta">
+          <span class="pill"><b>Papel:</b> Unidade Solicitante / Prestadora</span>
+          <span class="pill"><b>Marco:</b> Orçamento aprovado</span>
+          <span class="pill"><b>Saída:</b> Execução autorizada</span>
+        </div>
+
+        <div class="h3">O que acontece</div>
+        <div class="muted">
+          Quando o orçamento é aprovado, a unidade prestadora recebe aviso de aprovação.
+          O fluxo de abertura da OS é encerrado e a execução passa a ser permitida.
+        </div>
+
+        <div class="note">
+          <b>Regra:</b> criação de tarefas e execução da OS <b>somente após aprovação do orçamento final</b>.
+        </div>
+
+        <!-- Imagens 35 a 37 -->
+        <div class="imgbox">
+          <img src="Imagem%2035.png" alt="Imagem 35" onerror="this.onerror=null;this.src='Imagem%2035.jpg';this.onerror=function(){this.src='Imagem%2035.jpeg';}">
+          <div class="cap">Imagem 35 — Exemplo: notificação ao prestador informando aprovação</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2036.png" alt="Imagem 36" onerror="this.onerror=null;this.src='Imagem%2036.jpg';this.onerror=function(){this.src='Imagem%2036.jpeg';}">
+          <div class="cap">Imagem 36 — Exemplo: mensagem ao prestador informando aprovação</div>
+        </div>
+
+        <div class="imgbox">
+          <img src="Imagem%2037.png" alt="Imagem 37" onerror="this.onerror=null;this.src='Imagem%2037.jpg';this.onerror=function(){this.src='Imagem%2037.jpeg';}">
+          <div class="cap">Imagem 37 — Exemplo: card após criação/andamento (dados e comentários para leitura rápida)</div>
+        </div>
+      </div>
+
+      <!-- IDENTIFICAÇÃO -->
+      <div class="card" id="identificacao">
+        <div class="h2">Identificação do título da OS (marcadores)</div>
+        <div class="muted">O título possui um padrão para facilitar busca e organização.</div>
+
+        <div class="note" style="font-family:Consolas, Monaco, monospace;">
+          Exemplo: <b>OSUE200126BTQ649CAG</b><br>
+          OS = Ordem de Serviço<br>
+          U = Tipo de serviço (Urgente)<br>
+          E = Tipo de OS (Externa)<br>
+          200126 = Data de abertura (20/01/2026)<br>
+          BTQ = Unidade solicitante (Boutique)<br>
+          649 = ID da SPA<br>
+          CAG = Unidade prestadora (Comuniq AG)
+        </div>
+
+        <div class="muted" style="margin-top:10px;">
+          Há apenas <b>uma SPA</b> para unificar todas as OS. Usuários autorizados podem filtrar por título e visualizar itens específicos por unidade.
+        </div>
+      </div>
+
+      <!-- REGRAS CRÍTICAS -->
+      <div class="callout-err" id="regras">
+        <div class="h2">Regras críticas e governança do processo</div>
+        <ul>
+          <li>O fluxo completo só termina após <b>aprovação do orçamento</b> ou <b>cancelamento da negociação</b> pela unidade prestadora.</li>
+          <li>Cada etapa ocorre de forma automática — é <b>terminantemente proibido</b> mover o card manualmente na SPA antes de “Orçamento aprovado”.</li>
+          <li>A execução da OS e criação de tarefas só devem ocorrer <b>após aprovação do orçamento final</b>.</li>
+          <li>O processo não pode ser pausado, retrocedido ou reiniciado. Máxima atenção ao preenchimento dos campos.</li>
+          <li>Pontos de decisão no Feed aguardam ação por até <b>7 dias</b>. Sem ação, o fluxo segue com negativa por falta de interação.</li>
+          <li>Se perder o rastreio, filtre pelo <b>título da OS</b> e verifique decisões pendentes no Feed.</li>
+        </ul>
+
+        <!-- Imagem 38 -->
+        <div class="imgbox" style="border-color:#FCA5A5;background:#fff;">
+          <img src="Imagem%2038.png" alt="Imagem 38" onerror="this.onerror=null;this.src='Imagem%2038.jpg';this.onerror=function(){this.src='Imagem%2038.jpeg';}">
+          <div class="cap">Imagem 38 — Exemplo: filtro no feed pelo título da OS para localizar pontos de decisão</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        © Documentação interna • <a href="#top" style="color:#374151;">Voltar ao topo</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

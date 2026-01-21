@@ -27,9 +27,13 @@
       --err-tx:#7F1D1D;
 
       --shadow: 0 1px 2px rgba(0,0,0,.04);
+
+      /* Altura usada para offset do scroll */
+      --topbar-h: 56px;
     }
 
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       background:var(--bg);
@@ -38,10 +42,89 @@
       line-height:1.6;
     }
 
+    /* Evita que o scroll "cole" por baixo da barra fixa */
+    [id]{ scroll-margin-top: calc(var(--topbar-h) + 16px); }
+
+    /* ========== TOP NAV FIXA ========== */
+    .topnav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:9000;
+      background:rgba(248,250,252,.9);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .topnav-inner{
+      max-width:980px;
+      margin:0 auto;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .topnav-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .topnav-title{
+      font-size:12px;
+      color:#374151;
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .topnav-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .topnav-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:10px;
+      padding:8px 10px;
+      font-size:12px;
+      cursor:pointer;
+      color:#374151;
+      box-shadow:var(--shadow);
+      user-select:none;
+    }
+    .topnav-btn:hover{ background:var(--soft); }
+
+    .topnav-links{
+      max-width:980px;
+      margin:0 auto;
+      padding:0 14px 10px;
+      display:none;
+    }
+    .topnav-links.is-open{ display:block; }
+
+    .topnav-links .toc{
+      margin-top:0;
+    }
+
+    /* No desktop, mostra a barra sempre aberta */
+    @media (min-width: 860px){
+      :root{ --topbar-h: 92px; }
+      .topnav-links{ display:block; }
+      .topnav-btn{ display:none; }
+      .topnav-inner{ padding-bottom:6px; }
+      .topnav-links{ padding-bottom:12px; }
+    }
+
+    /* Quando lightbox estiver aberto, não atrapalhar */
+    .topnav.is-hidden{ display:none; }
+
+    /* ========== LAYOUT ========== */
     .wrap{
       width:100%;
       padding:28px 14px;
       text-align:center;
+      /* reserva espaço da barra fixa */
+      padding-top: calc(var(--topbar-h) + 18px);
     }
     .container{
       max-width:980px;
@@ -319,6 +402,36 @@
 </head>
 
 <body>
+  <!-- TOP NAV FIXA -->
+  <div class="topnav" id="topnav">
+    <div class="topnav-inner">
+      <div class="topnav-left">
+        <div class="topnav-title">Navegação rápida</div>
+      </div>
+      <div class="topnav-actions">
+        <button class="topnav-btn" type="button" id="navToggle">☰ Navegação</button>
+      </div>
+    </div>
+
+    <div class="topnav-links" id="navLinks">
+      <div class="toc">
+        <a href="#top">Topo</a>
+        <a href="#visao-geral">Visão geral</a>
+        <a href="#etapa-1">Etapa 1</a>
+        <a href="#etapa-2">Etapa 2</a>
+        <a href="#etapa-3">Etapa 3 (Urgência)</a>
+        <a href="#etapa-4">Etapa 4</a>
+        <a href="#etapa-5">Etapa 5</a>
+        <a href="#etapa-6">Etapa 6</a>
+        <a href="#etapa-7">Etapa 7</a>
+        <a href="#etapa-8">Etapa 8</a>
+        <a href="#etapa-9">Etapa 9</a>
+        <a href="#identificacao">Identificação</a>
+        <a href="#regras">Regras críticas</a>
+      </div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="container">
 
@@ -337,20 +450,8 @@
           <span class="badge badge-ok">Ativo</span>
         </div>
 
-        <div class="h3">Navegação rápida</div>
-        <div class="toc">
-          <a href="#visao-geral">Visão geral</a>
-          <a href="#etapa-1">Etapa 1</a>
-          <a href="#etapa-2">Etapa 2</a>
-          <a href="#etapa-3">Etapa 3 (Urgência)</a>
-          <a href="#etapa-4">Etapa 4</a>
-          <a href="#etapa-5">Etapa 5</a>
-          <a href="#etapa-6">Etapa 6</a>
-          <a href="#etapa-7">Etapa 7</a>
-          <a href="#etapa-8">Etapa 8</a>
-          <a href="#etapa-9">Etapa 9</a>
-          <a href="#identificacao">Identificação</a>
-          <a href="#regras">Regras críticas</a>
+        <div class="note">
+          A navegação rápida agora fica <b>fixa no topo</b> da tela.
         </div>
       </div>
 
@@ -1012,6 +1113,27 @@
 
   <script>
     (function () {
+      const topnav = document.getElementById('topnav');
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      // Toggle menu (mobile)
+      if (navToggle) {
+        navToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('is-open');
+        });
+      }
+
+      // Auto-close menu on link click (mobile)
+      document.querySelectorAll('.topnav a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.matchMedia('(max-width: 859px)').matches) {
+            navLinks.classList.remove('is-open');
+          }
+        });
+      });
+
+      // LIGHTBOX
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lbImg');
       const lbTitle = document.getElementById('lbTitle');
@@ -1051,7 +1173,6 @@
       }
 
       function setImageWithFallback(src) {
-        // tries .png -> .jpg -> .jpeg
         lbImg.onerror = null;
         lbImg.src = src;
 
@@ -1090,15 +1211,21 @@
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        // esconder topnav para não atrapalhar
+        if (topnav) topnav.classList.add('is-hidden');
       }
 
       function close() {
         lightbox.classList.remove('is-open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        // stop any dragging
+
         isDragging = false;
         lbStage.classList.remove('is-dragging');
+
+        // voltar topnav
+        if (topnav) topnav.classList.remove('is-hidden');
       }
 
       function zoomStep(delta) {
@@ -1119,7 +1246,7 @@
       // Thumbnail click
       zoomLinks.forEach((a, i) => {
         a.addEventListener('click', (e) => {
-          e.preventDefault(); // <-- impede subir pro topo
+          e.preventDefault();
           e.stopPropagation();
           openAt(i);
         });

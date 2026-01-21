@@ -190,12 +190,97 @@
       color:var(--muted);
       margin-top:8px;
     }
+
+    /* clickable image */
+    .imgbox a{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+    }
     .imgbox img{
       width:100%;
       height:auto;
       border:1px solid var(--border);
       border-radius:10px;
       display:block;
+      cursor:zoom-in;
+    }
+
+    /* Lightbox (no external libs) */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(17,24,39,.82);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px 14px;
+      z-index:9999;
+    }
+    .lightbox.is-open{ display:flex; }
+
+    .lightbox-card{
+      width:min(1200px, 96vw);
+      max-height:92vh;
+      background:#0B1220;
+      border:1px solid rgba(229,231,235,.18);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    .lightbox-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(229,231,235,.12);
+    }
+    .lightbox-title{
+      font-size:12px;
+      color:#E5E7EB;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .lightbox-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .lb-btn{
+      appearance:none;
+      border:1px solid rgba(229,231,235,.22);
+      background:rgba(255,255,255,.08);
+      color:#E5E7EB;
+      border-radius:10px;
+      padding:8px 10px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .lb-btn:hover{ background:rgba(255,255,255,.14); }
+    .lightbox-body{
+      background:#0B1220;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .lightbox-body img{
+      max-width:100%;
+      max-height:78vh;
+      border-radius:10px;
+      border:1px solid rgba(229,231,235,.18);
+      cursor:zoom-out;
+      display:block;
+    }
+    .lightbox-caption{
+      padding:10px 12px 12px;
+      font-size:12px;
+      color:#D1D5DB;
+      background:#0B1220;
     }
 
     .footer{
@@ -294,21 +379,25 @@
 
         <!-- Imagem 1 -->
         <div class="imgbox">
-          <img
-            src="Imagem%201.png"
-            alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS"
-            onerror="this.onerror=null;this.src='Imagem%201.jpg';this.onerror=function(){this.src='Imagem%201.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%201.png" data-alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS" data-cap="Imagem 1 — Exemplo: acesso ao fluxo “Realizar solicitação de OS”">
+            <img
+              src="Imagem%201.png"
+              alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS"
+              onerror="this.onerror=null;this.src='Imagem%201.jpg';this.onerror=function(){this.src='Imagem%201.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 1 — Exemplo: acesso ao fluxo “Realizar solicitação de OS”</div>
         </div>
 
         <!-- Imagem 2 -->
         <div class="imgbox">
-          <img
-            src="Imagem%202.png"
-            alt="Imagem 2 — Tela inicial do fluxo (Próximo)"
-            onerror="this.onerror=null;this.src='Imagem%202.jpg';this.onerror=function(){this.src='Imagem%202.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%202.png" data-alt="Imagem 2 — Tela inicial do fluxo (Próximo)" data-cap="Imagem 2 — Exemplo: tela inicial do fluxo (botão Próximo)">
+            <img
+              src="Imagem%202.png"
+              alt="Imagem 2 — Tela inicial do fluxo (Próximo)"
+              onerror="this.onerror=null;this.src='Imagem%202.jpg';this.onerror=function(){this.src='Imagem%202.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 2 — Exemplo: tela inicial do fluxo (botão Próximo)</div>
         </div>
       </div>
@@ -347,11 +436,13 @@
 
         <!-- Imagem 3 -->
         <div class="imgbox">
-          <img
-            src="Imagem%203.png"
-            alt="Imagem 3 — Formulário preenchido"
-            onerror="this.onerror=null;this.src='Imagem%203.jpg';this.onerror=function(){this.src='Imagem%203.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%203.png" data-alt="Imagem 3 — Formulário preenchido" data-cap="Imagem 3 — Exemplo: formulário de solicitação preenchido">
+            <img
+              src="Imagem%203.png"
+              alt="Imagem 3 — Formulário preenchido"
+              onerror="this.onerror=null;this.src='Imagem%203.jpg';this.onerror=function(){this.src='Imagem%203.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 3 — Exemplo: formulário de solicitação preenchido</div>
         </div>
 
@@ -385,49 +476,58 @@
 
         <div class="h3">Evidências (exemplos)</div>
 
-        <!-- Imagens 4 a 8 (conforme seu texto) -->
         <div class="imgbox">
-          <img
-            src="Imagem%204.png"
-            alt="Imagem 4 — Notificação ao solicitante ao abrir OS urgente"
-            onerror="this.onerror=null;this.src='Imagem%204.jpg';this.onerror=function(){this.src='Imagem%204.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%204.png" data-alt="Imagem 4 — Notificação ao solicitante (OS urgente)" data-cap="Imagem 4 — Exemplo: notificação ao solicitante (OS urgente)">
+            <img
+              src="Imagem%204.png"
+              alt="Imagem 4 — Notificação ao solicitante (OS urgente)"
+              onerror="this.onerror=null;this.src='Imagem%204.jpg';this.onerror=function(){this.src='Imagem%204.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 4 — Exemplo: notificação ao solicitante (OS urgente)</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%205.png"
-            alt="Imagem 5 — Fluxo de aprovação de urgência no feed do aprovador"
-            onerror="this.onerror=null;this.src='Imagem%205.jpg';this.onerror=function(){this.src='Imagem%205.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%205.png" data-alt="Imagem 5 — Fluxo de aprovação no feed" data-cap="Imagem 5 — Exemplo: fluxo de aprovação de urgência no feed do aprovador">
+            <img
+              src="Imagem%205.png"
+              alt="Imagem 5 — Fluxo de aprovação no feed"
+              onerror="this.onerror=null;this.src='Imagem%205.jpg';this.onerror=function(){this.src='Imagem%205.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 5 — Exemplo: fluxo de aprovação de urgência no feed do aprovador</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%206.png"
-            alt="Imagem 6 — Aprovação ou recusa (com motivo obrigatório na recusa)"
-            onerror="this.onerror=null;this.src='Imagem%206.jpg';this.onerror=function(){this.src='Imagem%206.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%206.png" data-alt="Imagem 6 — Aprovação/recusa (motivo obrigatório na recusa)" data-cap="Imagem 6 — Exemplo: aprovação/recusa (motivo obrigatório na recusa)">
+            <img
+              src="Imagem%206.png"
+              alt="Imagem 6 — Aprovação/recusa (motivo obrigatório na recusa)"
+              onerror="this.onerror=null;this.src='Imagem%206.jpg';this.onerror=function(){this.src='Imagem%206.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 6 — Exemplo: aprovação/recusa (motivo obrigatório na recusa)</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%207.png"
-            alt="Imagem 7 — Notificação ao solicitante informando recusa e anotações"
-            onerror="this.onerror=null;this.src='Imagem%207.jpg';this.onerror=function(){this.src='Imagem%207.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%207.png" data-alt="Imagem 7 — Notificação ao solicitante (recusa + anotações)" data-cap="Imagem 7 — Exemplo: notificação ao solicitante (recusa + “Anotações” com motivo)">
+            <img
+              src="Imagem%207.png"
+              alt="Imagem 7 — Notificação ao solicitante (recusa + anotações)"
+              onerror="this.onerror=null;this.src='Imagem%207.jpg';this.onerror=function(){this.src='Imagem%207.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 7 — Exemplo: notificação ao solicitante (recusa + “Anotações” com motivo)</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%208.png"
-            alt="Imagem 8 — Mensagem ao solicitante informando recusa e anotações"
-            onerror="this.onerror=null;this.src='Imagem%208.jpg';this.onerror=function(){this.src='Imagem%208.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%208.png" data-alt="Imagem 8 — Mensagem ao solicitante (recusa + anotações)" data-cap="Imagem 8 — Exemplo: mensagem ao solicitante (recusa + “Anotações” com motivo)">
+            <img
+              src="Imagem%208.png"
+              alt="Imagem 8 — Mensagem ao solicitante (recusa + anotações)"
+              onerror="this.onerror=null;this.src='Imagem%208.jpg';this.onerror=function(){this.src='Imagem%208.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 8 — Exemplo: mensagem ao solicitante (recusa + “Anotações” com motivo)</div>
         </div>
       </div>
@@ -458,76 +558,91 @@
           <b>Responsabilidade operacional:</b> se precisar briefing, o responsável da unidade prestadora deve contatar o solicitante para combinar agenda.
         </div>
 
-        <!-- Imagens 9 a 16 conforme seu texto -->
         <div class="imgbox">
-          <img
-            src="Imagem%209.png"
-            alt="Imagem 9 — Notificação ao solicitante sobre necessidade de briefing"
-            onerror="this.onerror=null;this.src='Imagem%209.jpg';this.onerror=function(){this.src='Imagem%209.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%209.png" data-alt="Imagem 9" data-cap="Imagem 9 — Exemplo: notificação ao solicitante sobre necessidade de briefing">
+            <img
+              src="Imagem%209.png"
+              alt="Imagem 9"
+              onerror="this.onerror=null;this.src='Imagem%209.jpg';this.onerror=function(){this.src='Imagem%209.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 9 — Exemplo: notificação ao solicitante sobre necessidade de briefing</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2010.png"
-            alt="Imagem 10 — Mensagem ao solicitante sobre necessidade de briefing"
-            onerror="this.onerror=null;this.src='Imagem%2010.jpg';this.onerror=function(){this.src='Imagem%2010.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2010.png" data-alt="Imagem 10" data-cap="Imagem 10 — Exemplo: mensagem ao solicitante sobre necessidade de briefing">
+            <img
+              src="Imagem%2010.png"
+              alt="Imagem 10"
+              onerror="this.onerror=null;this.src='Imagem%2010.jpg';this.onerror=function(){this.src='Imagem%2010.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 10 — Exemplo: mensagem ao solicitante sobre necessidade de briefing</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2011.png"
-            alt="Imagem 11 — Notificação ao prestador para verificar briefing"
-            onerror="this.onerror=null;this.src='Imagem%2011.jpg';this.onerror=function(){this.src='Imagem%2011.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2011.png" data-alt="Imagem 11" data-cap="Imagem 11 — Exemplo: notificação ao prestador para verificação de briefing">
+            <img
+              src="Imagem%2011.png"
+              alt="Imagem 11"
+              onerror="this.onerror=null;this.src='Imagem%2011.jpg';this.onerror=function(){this.src='Imagem%2011.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 11 — Exemplo: notificação ao prestador para verificação de briefing</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2012.png"
-            alt="Imagem 12 — Mensagem ao prestador para verificar briefing"
-            onerror="this.onerror=null;this.src='Imagem%2012.jpg';this.onerror=function(){this.src='Imagem%2012.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2012.png" data-alt="Imagem 12" data-cap="Imagem 12 — Exemplo: mensagem ao prestador para verificação de briefing">
+            <img
+              src="Imagem%2012.png"
+              alt="Imagem 12"
+              onerror="this.onerror=null;this.src='Imagem%2012.jpg';this.onerror=function(){this.src='Imagem%2012.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 12 — Exemplo: mensagem ao prestador para verificação de briefing</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2013.png"
-            alt="Imagem 13 — Fluxo no feed para verificação de briefing"
-            onerror="this.onerror=null;this.src='Imagem%2013.jpg';this.onerror=function(){this.src='Imagem%2013.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2013.png" data-alt="Imagem 13" data-cap="Imagem 13 — Exemplo: fluxo no feed para verificação de briefing">
+            <img
+              src="Imagem%2013.png"
+              alt="Imagem 13"
+              onerror="this.onerror=null;this.src='Imagem%2013.jpg';this.onerror=function(){this.src='Imagem%2013.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 13 — Exemplo: fluxo no feed para verificação de briefing</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2014.png"
-            alt="Imagem 14 — Decisão precisa ou não precisa briefing (motivo obrigatório ao precisar)"
-            onerror="this.onerror=null;this.src='Imagem%2014.jpg';this.onerror=function(){this.src='Imagem%2014.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2014.png" data-alt="Imagem 14" data-cap="Imagem 14 — Exemplo: decisão de briefing (motivo obrigatório ao selecionar “PRECISA DE BRIEFING”)">
+            <img
+              src="Imagem%2014.png"
+              alt="Imagem 14"
+              onerror="this.onerror=null;this.src='Imagem%2014.jpg';this.onerror=function(){this.src='Imagem%2014.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 14 — Exemplo: decisão de briefing (motivo obrigatório ao selecionar “PRECISA DE BRIEFING”)</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2015.png"
-            alt="Imagem 15 — Notificação ao solicitante caso exista necessidade de briefing"
-            onerror="this.onerror=null;this.src='Imagem%2015.jpg';this.onerror=function(){this.src='Imagem%2015.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2015.png" data-alt="Imagem 15" data-cap="Imagem 15 — Exemplo: notificação ao solicitante (briefing necessário)">
+            <img
+              src="Imagem%2015.png"
+              alt="Imagem 15"
+              onerror="this.onerror=null;this.src='Imagem%2015.jpg';this.onerror=function(){this.src='Imagem%2015.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 15 — Exemplo: notificação ao solicitante (briefing necessário)</div>
         </div>
 
         <div class="imgbox">
-          <img
-            src="Imagem%2016.png"
-            alt="Imagem 16 — Mensagem ao solicitante caso exista necessidade de briefing"
-            onerror="this.onerror=null;this.src='Imagem%2016.jpg';this.onerror=function(){this.src='Imagem%2016.jpeg';}"
-          >
+          <a href="#" class="zoom" data-src="Imagem%2016.png" data-alt="Imagem 16" data-cap="Imagem 16 — Exemplo: mensagem ao solicitante (briefing necessário)">
+            <img
+              src="Imagem%2016.png"
+              alt="Imagem 16"
+              onerror="this.onerror=null;this.src='Imagem%2016.jpg';this.onerror=function(){this.src='Imagem%2016.jpeg';}"
+            >
+          </a>
           <div class="cap">Imagem 16 — Exemplo: mensagem ao solicitante (briefing necessário)</div>
         </div>
       </div>
@@ -560,29 +675,38 @@
           Se presencial, reserve a sala manualmente após marcar a reunião.
         </div>
 
-        <!-- Imagens 17 a 21 -->
         <div class="imgbox">
-          <img src="Imagem%2017.png" alt="Imagem 17" onerror="this.onerror=null;this.src='Imagem%2017.jpg';this.onerror=function(){this.src='Imagem%2017.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2017.png" data-alt="Imagem 17" data-cap="Imagem 17 — Exemplo: fluxo ainda no feed após selecionar “PRECISA DE BRIEFING”">
+            <img src="Imagem%2017.png" alt="Imagem 17" onerror="this.onerror=null;this.src='Imagem%2017.jpg';this.onerror=function(){this.src='Imagem%2017.jpeg';}">
+          </a>
           <div class="cap">Imagem 17 — Exemplo: fluxo ainda no feed após selecionar “PRECISA DE BRIEFING”</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2018.png" alt="Imagem 18" onerror="this.onerror=null;this.src='Imagem%2018.jpg';this.onerror=function(){this.src='Imagem%2018.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2018.png" data-alt="Imagem 18" data-cap="Imagem 18 — Exemplo: tela do fluxo atualizada para marcar reunião">
+            <img src="Imagem%2018.png" alt="Imagem 18" onerror="this.onerror=null;this.src='Imagem%2018.jpg';this.onerror=function(){this.src='Imagem%2018.jpeg';}">
+          </a>
           <div class="cap">Imagem 18 — Exemplo: tela do fluxo atualizada para marcar reunião</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2019.png" alt="Imagem 19" onerror="this.onerror=null;this.src='Imagem%2019.jpg';this.onerror=function(){this.src='Imagem%2019.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2019.png" data-alt="Imagem 19" data-cap="Imagem 19 — Exemplo: notificação ao solicitante com dados da reunião">
+            <img src="Imagem%2019.png" alt="Imagem 19" onerror="this.onerror=null;this.src='Imagem%2019.jpg';this.onerror=function(){this.src='Imagem%2019.jpeg';}">
+          </a>
           <div class="cap">Imagem 19 — Exemplo: notificação ao solicitante com dados da reunião</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2020.png" alt="Imagem 20" onerror="this.onerror=null;this.src='Imagem%2020.jpg';this.onerror=function(){this.src='Imagem%2020.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2020.png" data-alt="Imagem 20" data-cap="Imagem 20 — Exemplo: mensagem ao solicitante com dados da reunião">
+            <img src="Imagem%2020.png" alt="Imagem 20" onerror="this.onerror=null;this.src='Imagem%2020.jpg';this.onerror=function(){this.src='Imagem%2020.jpeg';}">
+          </a>
           <div class="cap">Imagem 20 — Exemplo: mensagem ao solicitante com dados da reunião</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2021.png" alt="Imagem 21" onerror="this.onerror=null;this.src='Imagem%2021.jpg';this.onerror=function(){this.src='Imagem%2021.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2021.png" data-alt="Imagem 21" data-cap="Imagem 21 — Exemplo: reunião criada para tratar do briefing">
+            <img src="Imagem%2021.png" alt="Imagem 21" onerror="this.onerror=null;this.src='Imagem%2021.jpg';this.onerror=function(){this.src='Imagem%2021.jpeg';}">
+          </a>
           <div class="cap">Imagem 21 — Exemplo: reunião criada para tratar do briefing</div>
         </div>
 
@@ -620,24 +744,31 @@
         <div class="h3">Como prosseguir</div>
         <div class="muted">Após preencher, clicar em <b>Atribuir detalhes</b>.</div>
 
-        <!-- Imagens 22 a 25 -->
         <div class="imgbox">
-          <img src="Imagem%2022.png" alt="Imagem 22" onerror="this.onerror=null;this.src='Imagem%2022.jpg';this.onerror=function(){this.src='Imagem%2022.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2022.png" data-alt="Imagem 22" data-cap="Imagem 22 — Exemplo: notificação ao prestador para inserir informações do orçamento">
+            <img src="Imagem%2022.png" alt="Imagem 22" onerror="this.onerror=null;this.src='Imagem%2022.jpg';this.onerror=function(){this.src='Imagem%2022.jpeg';}">
+          </a>
           <div class="cap">Imagem 22 — Exemplo: notificação ao prestador para inserir informações do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2023.png" alt="Imagem 23" onerror="this.onerror=null;this.src='Imagem%2023.jpg';this.onerror=function(){this.src='Imagem%2023.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2023.png" data-alt="Imagem 23" data-cap="Imagem 23 — Exemplo: mensagem ao prestador para inserir informações do orçamento">
+            <img src="Imagem%2023.png" alt="Imagem 23" onerror="this.onerror=null;this.src='Imagem%2023.jpg';this.onerror=function(){this.src='Imagem%2023.jpeg';}">
+          </a>
           <div class="cap">Imagem 23 — Exemplo: mensagem ao prestador para inserir informações do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2024.png" alt="Imagem 24" onerror="this.onerror=null;this.src='Imagem%2024.jpg';this.onerror=function(){this.src='Imagem%2024.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2024.png" data-alt="Imagem 24" data-cap="Imagem 24 — Exemplo: fluxo no feed aguardando preenchimento do orçamento">
+            <img src="Imagem%2024.png" alt="Imagem 24" onerror="this.onerror=null;this.src='Imagem%2024.jpg';this.onerror=function(){this.src='Imagem%2024.jpeg';}">
+          </a>
           <div class="cap">Imagem 24 — Exemplo: fluxo no feed aguardando preenchimento do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2025.png" alt="Imagem 25" onerror="this.onerror=null;this.src='Imagem%2025.jpg';this.onerror=function(){this.src='Imagem%2025.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2025.png" data-alt="Imagem 25" data-cap="Imagem 25 — Exemplo: tela para preenchimento do orçamento">
+            <img src="Imagem%2025.png" alt="Imagem 25" onerror="this.onerror=null;this.src='Imagem%2025.jpg';this.onerror=function(){this.src='Imagem%2025.jpeg';}">
+          </a>
           <div class="cap">Imagem 25 — Exemplo: tela para preenchimento do orçamento</div>
         </div>
       </div>
@@ -653,7 +784,7 @@
 
         <div class="h3">O que acontece</div>
         <div class="muted">
-          O responsável pela unidade solicitante recebe o orçamento e decide aprovar ou recusar.  
+          O responsável pela unidade solicitante recebe o orçamento e decide aprovar ou recusar.
           Em caso de recusa, é obrigatório informar o motivo.
         </div>
 
@@ -664,24 +795,31 @@
           <li><b>Se recusar:</b> preencher obrigatoriamente “Por qual motivo está recusando?”.</li>
         </ul>
 
-        <!-- Imagens 26 a 29 -->
         <div class="imgbox">
-          <img src="Imagem%2026.png" alt="Imagem 26" onerror="this.onerror=null;this.src='Imagem%2026.jpg';this.onerror=function(){this.src='Imagem%2026.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2026.png" data-alt="Imagem 26" data-cap="Imagem 26 — Exemplo: notificação ao responsável solicitante para aprovação do orçamento">
+            <img src="Imagem%2026.png" alt="Imagem 26" onerror="this.onerror=null;this.src='Imagem%2026.jpg';this.onerror=function(){this.src='Imagem%2026.jpeg';}">
+          </a>
           <div class="cap">Imagem 26 — Exemplo: notificação ao responsável solicitante para aprovação do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2027.png" alt="Imagem 27" onerror="this.onerror=null;this.src='Imagem%2027.jpg';this.onerror=function(){this.src='Imagem%2027.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2027.png" data-alt="Imagem 27" data-cap="Imagem 27 — Exemplo: mensagem ao responsável solicitante para aprovação do orçamento">
+            <img src="Imagem%2027.png" alt="Imagem 27" onerror="this.onerror=null;this.src='Imagem%2027.jpg';this.onerror=function(){this.src='Imagem%2027.jpeg';}">
+          </a>
           <div class="cap">Imagem 27 — Exemplo: mensagem ao responsável solicitante para aprovação do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2028.png" alt="Imagem 28" onerror="this.onerror=null;this.src='Imagem%2028.jpg';this.onerror=function(){this.src='Imagem%2028.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2028.png" data-alt="Imagem 28" data-cap="Imagem 28 — Exemplo: fluxo no feed para aprovação/recusa do orçamento">
+            <img src="Imagem%2028.png" alt="Imagem 28" onerror="this.onerror=null;this.src='Imagem%2028.jpg';this.onerror=function(){this.src='Imagem%2028.jpeg';}">
+          </a>
           <div class="cap">Imagem 28 — Exemplo: fluxo no feed para aprovação/recusa do orçamento</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2029.png" alt="Imagem 29" onerror="this.onerror=null;this.src='Imagem%2029.jpg';this.onerror=function(){this.src='Imagem%2029.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2029.png" data-alt="Imagem 29" data-cap="Imagem 29 — Exemplo: tela de aprovação/recusa (motivo obrigatório em recusa)">
+            <img src="Imagem%2029.png" alt="Imagem 29" onerror="this.onerror=null;this.src='Imagem%2029.jpg';this.onerror=function(){this.src='Imagem%2029.jpeg';}">
+          </a>
           <div class="cap">Imagem 29 — Exemplo: tela de aprovação/recusa (motivo obrigatório em recusa)</div>
         </div>
       </div>
@@ -706,29 +844,38 @@
           O sistema reprocesa e volta ao fluxo de aprovação do solicitante.
         </div>
 
-        <!-- Imagens 30 a 34 -->
         <div class="imgbox">
-          <img src="Imagem%2030.png" alt="Imagem 30" onerror="this.onerror=null;this.src='Imagem%2030.jpg';this.onerror=function(){this.src='Imagem%2030.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2030.png" data-alt="Imagem 30" data-cap="Imagem 30 — Exemplo: notificação de recusa para a unidade prestadora">
+            <img src="Imagem%2030.png" alt="Imagem 30" onerror="this.onerror=null;this.src='Imagem%2030.jpg';this.onerror=function(){this.src='Imagem%2030.jpeg';}">
+          </a>
           <div class="cap">Imagem 30 — Exemplo: notificação de recusa para a unidade prestadora</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2031.png" alt="Imagem 31" onerror="this.onerror=null;this.src='Imagem%2031.jpg';this.onerror=function(){this.src='Imagem%2031.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2031.png" data-alt="Imagem 31" data-cap="Imagem 31 — Exemplo: mensagem de recusa para a unidade prestadora">
+            <img src="Imagem%2031.png" alt="Imagem 31" onerror="this.onerror=null;this.src='Imagem%2031.jpg';this.onerror=function(){this.src='Imagem%2031.jpeg';}">
+          </a>
           <div class="cap">Imagem 31 — Exemplo: mensagem de recusa para a unidade prestadora</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2032.png" alt="Imagem 32" onerror="this.onerror=null;this.src='Imagem%2032.jpg';this.onerror=function(){this.src='Imagem%2032.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2032.png" data-alt="Imagem 32" data-cap="Imagem 32 — Exemplo: fluxo no feed para envio de nova proposta">
+            <img src="Imagem%2032.png" alt="Imagem 32" onerror="this.onerror=null;this.src='Imagem%2032.jpg';this.onerror=function(){this.src='Imagem%2032.jpeg';}">
+          </a>
           <div class="cap">Imagem 32 — Exemplo: fluxo no feed para envio de nova proposta</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2033.png" alt="Imagem 33" onerror="this.onerror=null;this.src='Imagem%2033.jpg';this.onerror=function(){this.src='Imagem%2033.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2033.png" data-alt="Imagem 33" data-cap="Imagem 33 — Exemplo: tela para ajustar proposta e reenviar orçamento (mudanças obrigatórias)">
+            <img src="Imagem%2033.png" alt="Imagem 33" onerror="this.onerror=null;this.src='Imagem%2033.jpg';this.onerror=function(){this.src='Imagem%2033.jpeg';}">
+          </a>
           <div class="cap">Imagem 33 — Exemplo: tela para ajustar proposta e reenviar orçamento (mudanças obrigatórias)</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2034.png" alt="Imagem 34" onerror="this.onerror=null;this.src='Imagem%2034.jpg';this.onerror=function(){this.src='Imagem%2034.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2034.png" data-alt="Imagem 34" data-cap="Imagem 34 — Exemplo: orçamento gerado após reprocessamento">
+            <img src="Imagem%2034.png" alt="Imagem 34" onerror="this.onerror=null;this.src='Imagem%2034.jpg';this.onerror=function(){this.src='Imagem%2034.jpeg';}">
+          </a>
           <div class="cap">Imagem 34 — Exemplo: orçamento gerado após reprocessamento</div>
         </div>
       </div>
@@ -752,19 +899,24 @@
           <b>Regra:</b> criação de tarefas e execução da OS <b>somente após aprovação do orçamento final</b>.
         </div>
 
-        <!-- Imagens 35 a 37 -->
         <div class="imgbox">
-          <img src="Imagem%2035.png" alt="Imagem 35" onerror="this.onerror=null;this.src='Imagem%2035.jpg';this.onerror=function(){this.src='Imagem%2035.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2035.png" data-alt="Imagem 35" data-cap="Imagem 35 — Exemplo: notificação ao prestador informando aprovação">
+            <img src="Imagem%2035.png" alt="Imagem 35" onerror="this.onerror=null;this.src='Imagem%2035.jpg';this.onerror=function(){this.src='Imagem%2035.jpeg';}">
+          </a>
           <div class="cap">Imagem 35 — Exemplo: notificação ao prestador informando aprovação</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2036.png" alt="Imagem 36" onerror="this.onerror=null;this.src='Imagem%2036.jpg';this.onerror=function(){this.src='Imagem%2036.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2036.png" data-alt="Imagem 36" data-cap="Imagem 36 — Exemplo: mensagem ao prestador informando aprovação">
+            <img src="Imagem%2036.png" alt="Imagem 36" onerror="this.onerror=null;this.src='Imagem%2036.jpg';this.onerror=function(){this.src='Imagem%2036.jpeg';}">
+          </a>
           <div class="cap">Imagem 36 — Exemplo: mensagem ao prestador informando aprovação</div>
         </div>
 
         <div class="imgbox">
-          <img src="Imagem%2037.png" alt="Imagem 37" onerror="this.onerror=null;this.src='Imagem%2037.jpg';this.onerror=function(){this.src='Imagem%2037.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2037.png" data-alt="Imagem 37" data-cap="Imagem 37 — Exemplo: card após criação/andamento (dados e comentários para leitura rápida)">
+            <img src="Imagem%2037.png" alt="Imagem 37" onerror="this.onerror=null;this.src='Imagem%2037.jpg';this.onerror=function(){this.src='Imagem%2037.jpeg';}">
+          </a>
           <div class="cap">Imagem 37 — Exemplo: card após criação/andamento (dados e comentários para leitura rápida)</div>
         </div>
       </div>
@@ -802,9 +954,10 @@
           <li>Se perder o rastreio, filtre pelo <b>título da OS</b> e verifique decisões pendentes no Feed.</li>
         </ul>
 
-        <!-- Imagem 38 -->
         <div class="imgbox" style="border-color:#FCA5A5;background:#fff;">
-          <img src="Imagem%2038.png" alt="Imagem 38" onerror="this.onerror=null;this.src='Imagem%2038.jpg';this.onerror=function(){this.src='Imagem%2038.jpeg';}">
+          <a href="#" class="zoom" data-src="Imagem%2038.png" data-alt="Imagem 38" data-cap="Imagem 38 — Exemplo: filtro no feed pelo título da OS para localizar pontos de decisão">
+            <img src="Imagem%2038.png" alt="Imagem 38" onerror="this.onerror=null;this.src='Imagem%2038.jpg';this.onerror=function(){this.src='Imagem%2038.jpeg';}">
+          </a>
           <div class="cap">Imagem 38 — Exemplo: filtro no feed pelo título da OS para localizar pontos de decisão</div>
         </div>
       </div>

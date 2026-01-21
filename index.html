@@ -426,7 +426,7 @@
         <a href="#etapa-7">Etapa 7</a>
         <a href="#etapa-8">Etapa 8</a>
         <a href="#etapa-9">Etapa 9</a>
-        <a href="#identificacao">Identificação</a>
+        <a href="#informacoes-gerais">Informações gerais</a>
         <a href="#regras">Regras críticas</a>
       </div>
     </div>
@@ -449,30 +449,28 @@
           <span class="badge"><b>Governança:</b> Processo automatizado</span>
           <span class="badge badge-ok">Ativo</span>
         </div>
-
       </div>
 
       <!-- VISÃO GERAL -->
       <div class="card" id="visao-geral">
         <div class="h2">Visão geral do processo</div>
         <div class="muted">
-          O processo padroniza a criação de Ordens de Serviço entre unidades de negócio, garantindo rastreabilidade,
-          clareza de responsabilidades, formalização de briefing e controle de orçamento antes de qualquer execução.
+          O fluxo padroniza a abertura e a aprovação de Ordens de Serviço entre unidades de negócio.
+          A OS é registrada em uma SPA única, passa por validações (urgência, briefing, orçamento) e só pode ser executada após aprovação final do orçamento.
         </div>
 
-        <div class="h3">Entidades envolvidas</div>
+        <div class="h3">Entidades envolvidas e responsabilidades</div>
         <ul>
-          <li><b>Solicitante:</b> unidade que abre a OS e fornece as informações de demanda.</li>
-          <li><b>Unidade Prestadora:</b> unidade que analisa, define briefing, elabora orçamento e executa após aprovação.</li>
-          <li><b>Aprovador de urgência:</b> Dr. Roberto Régis (somente em OS marcadas como Urgentes).</li>
-          <li><b>Responsável da unidade solicitante:</b> aprova/recusa o orçamento.</li>
+          <li><b>Solicitante:</b> abre a OS, descreve a demanda e fornece anexos e contexto para execução.</li>
+          <li><b>Responsável pelo recebimento de OS (Unidade Prestadora):</b> analisa a solicitação, decide sobre necessidade de briefing, marca reunião, preenche dados para orçamento e gerencia nova proposta/cancelamento quando aplicável.</li>
+          <li><b>Aprovador de urgência:</b> Dr. Roberto Régis — avalia se a urgência é necessária (somente quando Tipo de Serviço = Urgente).</li>
+          <li><b>Responsável da unidade de negócio solicitante:</b> aprova ou recusa o orçamento (recusa exige justificativa).</li>
         </ul>
 
-        <div class="h3">Resultado esperado</div>
+        <div class="h3">Regras de navegação do fluxo</div>
         <ul>
-          <li>OS registrada na <b>SPA Única</b>, com informações completas.</li>
-          <li>Se aplicável: urgência avaliada, briefing registrado, orçamento formalizado.</li>
-          <li>Execução autorizada <b>apenas após aprovação final do orçamento</b>.</li>
+          <li>Se <b>Tipo de serviço ≠ Urgente</b>, o fluxo segue diretamente para a <b>verificação de necessidade de briefing</b>.</li>
+          <li>Se <b>Tipo de serviço = Urgente</b>, a solicitação passa por <b>avaliação do Dr. Roberto Régis</b> antes de seguir para a Unidade Prestadora.</li>
         </ul>
       </div>
 
@@ -482,45 +480,20 @@
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Solicitante</span>
           <span class="pill"><b>Canal:</b> Feed → Fluxos de Trabalho</span>
-          <span class="pill"><b>Saída:</b> Formulário da OS aberto</span>
-        </div>
-
-        <div class="h3">O que acontece</div>
-        <div class="muted">
-          O solicitante acessa o fluxo “Realizar solicitação de OS” no Feed e inicia o processo formal de abertura.
+          <span class="pill"><b>Saída:</b> Fluxo iniciado</span>
         </div>
 
         <div class="h3">Como prosseguir (passo a passo)</div>
         <ol>
           <li>Acessar o <b>Feed</b></li>
-          <li>Clicar em <b>Mais</b> → <b>Fluxos de Trabalho</b></li>
-          <li>Procurar <b>“Realizar solicitação de OS”</b></li>
+          <li>Clicar em <b>Mais</b></li>
+          <li>Clicar em <b>Fluxos de Trabalho</b></li>
+          <li>Procurar por <b>“Realizar solicitação de OS”</b></li>
           <li>Clicar em <b>Iniciar</b></li>
-          <li>Na tela seguinte, clicar em <b>Próximo</b></li>
         </ol>
 
-        <div class="h3">Evidências (exemplos)</div>
-
-        <div class="imgbox">
-          <a class="zoom" href="Imagem%201.png" data-src="Imagem%201.png"
-             data-alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS"
-             data-cap="Imagem 1 — Exemplo: acesso ao fluxo “Realizar solicitação de OS”">
-            <img src="Imagem%201.png"
-                 alt="Imagem 1 — Acesso ao fluxo Realizar solicitação de OS"
-                 onerror="this.onerror=null;this.src='Imagem%201.jpg';this.onerror=function(){this.src='Imagem%201.jpeg';}">
-          </a>
-          <div class="cap">Imagem 1 — Exemplo: acesso ao fluxo “Realizar solicitação de OS”</div>
-        </div>
-
-        <div class="imgbox">
-          <a class="zoom" href="Imagem%202.png" data-src="Imagem%202.png"
-             data-alt="Imagem 2 — Tela inicial do fluxo (Próximo)"
-             data-cap="Imagem 2 — Exemplo: tela inicial do fluxo (botão Próximo)">
-            <img src="Imagem%202.png"
-                 alt="Imagem 2 — Tela inicial do fluxo (Próximo)"
-                 onerror="this.onerror=null;this.src='Imagem%202.jpg';this.onerror=function(){this.src='Imagem%202.jpeg';}">
-          </a>
-          <div class="cap">Imagem 2 — Exemplo: tela inicial do fluxo (botão Próximo)</div>
+        <div class="note">
+          Na tela seguinte do fluxo, clique em <b>Próximo</b> para avançar ao formulário de solicitação.
         </div>
       </div>
 
@@ -529,46 +502,38 @@
         <div class="h2">Etapa 2 — Preenchimento da solicitação (Solicitante)</div>
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Solicitante</span>
-          <span class="pill"><b>Entrada:</b> Formulário aberto</span>
-          <span class="pill"><b>Saída:</b> Solicitação iniciada</span>
+          <span class="pill"><b>Entrada:</b> Formulário de OS</span>
+          <span class="pill"><b>Saída:</b> Solicitação criada na SPA</span>
         </div>
 
-        <div class="h3">O que acontece</div>
-        <div class="muted">
-          O solicitante fornece os dados necessários para que a unidade prestadora entenda objetivo, justificativa,
-          escopo e evidências (anexos). O correto preenchimento é crítico, pois o fluxo não pode ser reiniciado.
-        </div>
-
-        <div class="h3">Campos e orientações</div>
+        <div class="h3">Campos obrigatórios e orientações de preenchimento</div>
         <ul>
-          <li><b>Solicitante:</b> sua unidade de negócio.</li>
-          <li><b>Tipo de serviço:</b> <b>Programado</b> (prazo maior) ou <b>Urgente</b> (gera avaliação de urgência).</li>
-          <li><b>Expectativa de prazo para entrega:</b> data que você espera a entrega.</li>
-          <li><b>Prestador:</b> unidade de negócio que prestará o serviço.</li>
-          <li><b>Tipo de OS:</b> <b>Interna</b> (entre unidades) ou <b>Externa</b> (representando cliente externo).</li>
-          <li><b>Cliente Externo:</b> obrigatório se Tipo de OS = Externa.</li>
-          <li><b>Objetivo:</b> resultado final esperado (ex.: “sistema de abertura de OS completo”).</li>
-          <li><b>Justificativa:</b> motivo do pedido (ex.: necessidade de negociação/valores de prestação de serviço).</li>
-          <li><b>Descrição:</b> detalhes técnicos/funcionais (ex.: níveis de acesso, regras, escopo).</li>
-          <li><b>Anexos:</b> arquivos de apoio (prints, documentos, especificações).</li>
+          <li><b>Solicitante:</b> Sua unidade de negócio</li>
+          <li><b>Tipo de serviço:</b> Programado (Possui um tempo longo até a entrega) ou Urgente (Possui urgencia na entrega)</li>
+          <li><b>Expectativa de prazo para entrega:</b> Data em que você espera que seja entregue.</li>
+          <li><b>Prestador:</b> Unidade de negócio que prestará esse serviço a você.</li>
+          <li><b>Tipo de OS:</b> Interna (Entre unidades de negócio internas), Externa (Quando você está representando um cliente externo).</li>
+          <li><b>Cliente Externo:</b> Se a opção anterior for "Externa", deverá incluir o nome do cliente externo que está representando.</li>
+          <li><b>Objetivo:</b> Objetivo final da entrega (Ex: Obter um sistema de abertura de OS completo)</li>
+          <li><b>Justificativa:</b> Motivo pelo qual precisa do serviço (Ex: Preciso do sistema de OS para sanar a necessidade de negociação de valores de prestação de serviço)</li>
+          <li><b>Descrição:</b> Detalhes da necessidade (Ex: Preciso que o sistema possua hierarquia de acessos sendo o usuário Master com permissão total, Admin com permissões x, y e Z etc...)</li>
+          <li><b>Anexos:</b> Todo e qualquer arquivo que possa auxiliar a unidade prestadora a concluir esta OS.</li>
         </ul>
 
-        <div class="h3">Como prosseguir</div>
+        <div class="h3">Como finalizar a criação</div>
         <div class="muted">Após preencher todos os campos, clicar em <b>Iniciar</b>.</div>
 
-        <div class="imgbox">
-          <a class="zoom" href="Imagem%203.png" data-src="Imagem%203.png"
-             data-alt="Imagem 3 — Formulário preenchido"
-             data-cap="Imagem 3 — Exemplo: formulário de solicitação preenchido">
-            <img src="Imagem%203.png"
-                 alt="Imagem 3 — Formulário preenchido"
-                 onerror="this.onerror=null;this.src='Imagem%203.jpg';this.onerror=function(){this.src='Imagem%203.jpeg';}">
-          </a>
-          <div class="cap">Imagem 3 — Exemplo: formulário de solicitação preenchido</div>
+        <div class="note">
+          <b>Atenção:</b> Máxima atenção ao preenchimento de todos os campos, pois o processo não pode ser pausado, retrocedido ou reiniciado!
         </div>
 
-        <div class="note">
-          <b>Regra:</b> Se o Tipo de Serviço NÃO for Urgente, o fluxo segue diretamente para a <b>verificação de briefing</b>.
+        <div class="callout-warn" style="margin-top:16px;">
+          <div class="h2">Atenção — Condição de urgência</div>
+          <div class="muted" style="color:var(--warn-tx);">
+            Ao utilizar o "Tipo de Serviço" como Urgênte, a solicitação passará por avaliação de Dr. Roberto Régis para verificação da necessidade de urgência!
+            (Após, o mesmo poderá recusar ou aceitar a urgência. Se caso for recusada, o card da SPA irá para a raia de "Ordem de urgência recusada" e o fluxo será encerrado.
+            Caso seja aceita o fluxo segue normalmente para o responsável da unidade prestadora)
+          </div>
         </div>
       </div>
 
@@ -584,158 +549,208 @@
 
         <div class="h3">O que acontece</div>
         <div class="muted" style="color:var(--warn-tx);">
-          Ao definir o Tipo de Serviço como <b>Urgente</b>, a solicitação é encaminhada para avaliação do Dr. Roberto Régis,
-          que decide se a urgência é necessária.
+          A solicitação é encaminhada ao aprovador de urgência para validação. A decisão determina se o fluxo segue para a Unidade Prestadora ou se é encerrado.
         </div>
 
-        <div class="h3">Decisão e consequências</div>
+        <div class="h3">Decisão e consequência operacional</div>
         <ul>
-          <li><b>Se aprovada:</b> o fluxo segue normalmente para a unidade prestadora.</li>
-          <li><b>Se recusada:</b> o card da SPA vai para a raia <b>“Ordem de urgência recusada”</b> e o fluxo é encerrado.</li>
-          <li><b>Obrigatório na recusa:</b> preencher o campo <b>“Motivo da recusa da OS”</b>.</li>
+          <li><b>Se recusada:</b> o card da SPA irá para a raia de <b>"Ordem de urgência recusada"</b> e o fluxo será encerrado.</li>
+          <li><b>Se aceita:</b> o fluxo segue normalmente para o responsável da unidade prestadora.</li>
+          <li><b>Obrigatório na recusa:</b> preenchimento do motivo no campo <b>"Motivo da recusa da OS"</b>.</li>
         </ul>
 
         <div class="h3">Evidências (exemplos)</div>
 
+        <!-- Imagem 1 -->
+        <div class="imgbox">
+          <a class="zoom" href="Imagem%201.png" data-src="Imagem%201.png"
+             data-alt="Imagem 1"
+             data-cap="Exemplo de notificação recebida pelo usuário solicitante ao abrir uma OS de urgência:">
+            <img src="Imagem%201.png" alt="Imagem 1"
+                 onerror="this.onerror=null;this.src='Imagem%201.jpg';this.onerror=function(){this.src='Imagem%201.jpeg';}">
+          </a>
+          <div class="cap">Exemplo de notificação recebida pelo usuário solicitante ao abrir uma OS de urgência:</div>
+        </div>
+
+        <!-- Imagem 2 -->
+        <div class="imgbox">
+          <a class="zoom" href="Imagem%202.png" data-src="Imagem%202.png"
+             data-alt="Imagem 2"
+             data-cap="Exemplo de mensagem recebita pelo usuário solicitante ao abrir uma OS de urgência:">
+            <img src="Imagem%202.png" alt="Imagem 2"
+                 onerror="this.onerror=null;this.src='Imagem%202.jpg';this.onerror=function(){this.src='Imagem%202.jpeg';}">
+          </a>
+          <div class="cap">Exemplo de mensagem recebita pelo usuário solicitante ao abrir uma OS de urgência:</div>
+        </div>
+
+        <!-- Imagem 3 -->
+        <div class="imgbox">
+          <a class="zoom" href="Imagem%203.png" data-src="Imagem%203.png"
+             data-alt="Imagem 3"
+             data-cap="Exemplo de notificação recebida pelo aprovador de urgencia, quando aberta uma OS de urgencia:">
+            <img src="Imagem%203.png" alt="Imagem 3"
+                 onerror="this.onerror=null;this.src='Imagem%203.jpg';this.onerror=function(){this.src='Imagem%203.jpeg';}">
+          </a>
+          <div class="cap">Exemplo de notificação recebida pelo aprovador de urgencia, quando aberta uma OS de urgencia:</div>
+        </div>
+
+        <!-- Imagem 4 -->
         <div class="imgbox">
           <a class="zoom" href="Imagem%204.png" data-src="Imagem%204.png"
-             data-alt="Imagem 4 — Notificação ao solicitante (OS urgente)"
-             data-cap="Imagem 4 — Exemplo: notificação ao solicitante (OS urgente)">
-            <img src="Imagem%204.png" alt="Imagem 4 — Notificação ao solicitante (OS urgente)"
+             data-alt="Imagem 4"
+             data-cap="Exemplo de mensagem recebida pelo aprovador de urgencia, quando aberta uma OS de urgencia:">
+            <img src="Imagem%204.png" alt="Imagem 4"
                  onerror="this.onerror=null;this.src='Imagem%204.jpg';this.onerror=function(){this.src='Imagem%204.jpeg';}">
           </a>
-          <div class="cap">Imagem 4 — Exemplo: notificação ao solicitante (OS urgente)</div>
+          <div class="cap">Exemplo de mensagem recebida pelo aprovador de urgencia, quando aberta uma OS de urgencia:</div>
         </div>
 
+        <!-- Imagem 5 -->
         <div class="imgbox">
           <a class="zoom" href="Imagem%205.png" data-src="Imagem%205.png"
-             data-alt="Imagem 5 — Fluxo de aprovação no feed"
-             data-cap="Imagem 5 — Exemplo: fluxo de aprovação de urgência no feed do aprovador">
-            <img src="Imagem%205.png" alt="Imagem 5 — Fluxo de aprovação no feed"
+             data-alt="Imagem 5"
+             data-cap="Exemplo de fluxo de aprovação de emergencia no feed do aprovador de urgencia:">
+            <img src="Imagem%205.png" alt="Imagem 5"
                  onerror="this.onerror=null;this.src='Imagem%205.jpg';this.onerror=function(){this.src='Imagem%205.jpeg';}">
           </a>
-          <div class="cap">Imagem 5 — Exemplo: fluxo de aprovação de urgência no feed do aprovador</div>
+          <div class="cap">Exemplo de fluxo de aprovação de emergencia no feed do aprovador de urgencia:</div>
         </div>
 
+        <!-- Imagem 6 -->
         <div class="imgbox">
           <a class="zoom" href="Imagem%206.png" data-src="Imagem%206.png"
-             data-alt="Imagem 6 — Aprovação/recusa (motivo obrigatório)"
-             data-cap="Imagem 6 — Exemplo: aprovação/recusa (motivo obrigatório na recusa)">
-            <img src="Imagem%206.png" alt="Imagem 6 — Aprovação/recusa (motivo obrigatório)"
+             data-alt="Imagem 6"
+             data-cap="Exemplo de finalização da aprovação ou recusa por parte do usuário aprovador de emergencia (Atencção na recusa!  Ha obrigatoriedade de escrita do motivo da recusa no campo &quot;Motivo da recusa da OS&quot;):">
+            <img src="Imagem%206.png" alt="Imagem 6"
                  onerror="this.onerror=null;this.src='Imagem%206.jpg';this.onerror=function(){this.src='Imagem%206.jpeg';}">
           </a>
-          <div class="cap">Imagem 6 — Exemplo: aprovação/recusa (motivo obrigatório na recusa)</div>
+          <div class="cap">Exemplo de finalização da aprovação ou recusa por parte do usuário aprovador de emergencia (Atencção na recusa!  Ha obrigatoriedade de escrita do motivo da recusa no campo "Motivo da recusa da OS"):</div>
         </div>
 
+        <!-- Imagem 7 -->
         <div class="imgbox">
           <a class="zoom" href="Imagem%207.png" data-src="Imagem%207.png"
-             data-alt="Imagem 7 — Notificação ao solicitante (recusa + anotações)"
-             data-cap="Imagem 7 — Exemplo: notificação ao solicitante (recusa + “Anotações” com motivo)">
-            <img src="Imagem%207.png" alt="Imagem 7 — Notificação ao solicitante (recusa + anotações)"
+             data-alt="Imagem 7"
+             data-cap="Exemplo de notificação ao solicitante avisando sobre a recusa da OS de emergencia(Atenção a informação de &quot;Anotações:&quot; que contém o motivo da recusa):">
+            <img src="Imagem%207.png" alt="Imagem 7"
                  onerror="this.onerror=null;this.src='Imagem%207.jpg';this.onerror=function(){this.src='Imagem%207.jpeg';}">
           </a>
-          <div class="cap">Imagem 7 — Exemplo: notificação ao solicitante (recusa + “Anotações” com motivo)</div>
+          <div class="cap">Exemplo de notificação ao solicitante avisando sobre a recusa da OS de emergencia(Atenção a informação de "Anotações:" que contém o motivo da recusa):</div>
         </div>
 
+        <!-- Imagem 8 -->
         <div class="imgbox">
           <a class="zoom" href="Imagem%208.png" data-src="Imagem%208.png"
-             data-alt="Imagem 8 — Mensagem ao solicitante (recusa + anotações)"
-             data-cap="Imagem 8 — Exemplo: mensagem ao solicitante (recusa + “Anotações” com motivo)">
-            <img src="Imagem%208.png" alt="Imagem 8 — Mensagem ao solicitante (recusa + anotações)"
+             data-alt="Imagem 8"
+             data-cap="Exemplo de mensagem ao solicitante avisando sobre a recusa da OS de emergencia(Atenção a informação de &quot;Anotações:&quot; que contém o motivo da recusa):">
+            <img src="Imagem%208.png" alt="Imagem 8"
                  onerror="this.onerror=null;this.src='Imagem%208.jpg';this.onerror=function(){this.src='Imagem%208.jpeg';}">
           </a>
-          <div class="cap">Imagem 8 — Exemplo: mensagem ao solicitante (recusa + “Anotações” com motivo)</div>
+          <div class="cap">Exemplo de mensagem ao solicitante avisando sobre a recusa da OS de emergencia(Atenção a informação de "Anotações:" que contém o motivo da recusa):</div>
         </div>
       </div>
 
       <!-- ETAPA 4 -->
       <div class="card" id="etapa-4">
-        <div class="h2">Etapa 4 — Verificação de necessidade de briefing (Unidade Prestadora)</div>
+        <div class="h2">Etapa 4 — Verificação da necessidade de briefing (Responsável pelo recebimento de OS — Unidade Prestadora)</div>
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
-          <span class="pill"><b>Entrada:</b> OS criada/encaminhada</span>
-          <span class="pill"><b>Saída:</b> Precisa ou não precisa briefing</span>
+          <span class="pill"><b>Entrada:</b> OS criada (e urgência aprovada, se aplicável)</span>
+          <span class="pill"><b>Saída:</b> Definição: precisa ou não precisa briefing</span>
         </div>
 
         <div class="h3">O que acontece</div>
         <div class="muted">
-          Após aprovação de urgência (ou quando a OS não é urgente), o solicitante é informado que a OS está
-          em verificação para determinar se será necessário um briefing (reunião) para eliminar dúvidas e lacunas.
+          Seguindo o fluxo após aprovação de urgência, o solicitante receberá uma mensagem informando que sua OS está passando por uma verificação se há neessidade de uma reunião de briefing para esclareciamento de dúvidas por falta de informações ou qualquer outra situação que possa prejudicar o desenvolvimento do do produto final da OS.
         </div>
 
-        <div class="h3">Como prosseguir (Unidade Prestadora)</div>
+        <div class="h3">Regras da decisão</div>
         <ul>
-          <li>Acessar o fluxo no Feed.</li>
-          <li>Tomar a decisão: <b>PRECISA DE BRIEFING</b> ou <b>NÃO PRECISA</b>.</li>
-          <li><b>Se PRECISA DE BRIEFING:</b> informar obrigatoriamente o motivo (o solicitante será notificado).</li>
+          <li>O responsável da unidade prestadora realiza a decisão: <b>PRECISA DE BRIEFING</b> ou <b>NÃO PRECISA</b>.</li>
+          <li>Observação: Ao clciar em <b>"PRECISA DE BRIEFING"</b> é obrigatorio informar o motivo pelo qual precisa, dessa forma o solicitante será informado e poderá se preparar para a reunião.</li>
+          <li>Importante ressaltar que nesta etapa, o responsável pela unidade prestadora, deverá contatar o solicitante para realizar a marcação da reunião de briefing detalhado relacionada a OS em questão</li>
         </ul>
 
-        <div class="note">
-          <b>Responsabilidade operacional:</b> se precisar briefing, o responsável da unidade prestadora deve contatar o solicitante para combinar agenda.
-        </div>
+        <div class="h3">Evidências (exemplos)</div>
 
+        <!-- Imagem 9 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%209.png" data-src="Imagem%209.png" data-alt="Imagem 9" data-cap="Imagem 9 — Exemplo: notificação ao solicitante sobre necessidade de briefing">
+          <a class="zoom" href="Imagem%209.png" data-src="Imagem%209.png" data-alt="Imagem 9"
+             data-cap="Exemplo de notificação ao solicitante Avisando sobre a necessidade de Briefing:">
             <img src="Imagem%209.png" alt="Imagem 9"
                  onerror="this.onerror=null;this.src='Imagem%209.jpg';this.onerror=function(){this.src='Imagem%209.jpeg';}">
           </a>
-          <div class="cap">Imagem 9 — Exemplo: notificação ao solicitante sobre necessidade de briefing</div>
+          <div class="cap">Exemplo de notificação ao solicitante Avisando sobre a necessidade de Briefing:</div>
         </div>
 
+        <!-- Imagem 10 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2010.png" data-src="Imagem%2010.png" data-alt="Imagem 10" data-cap="Imagem 10 — Exemplo: mensagem ao solicitante sobre necessidade de briefing">
+          <a class="zoom" href="Imagem%2010.png" data-src="Imagem%2010.png" data-alt="Imagem 10"
+             data-cap="Exemplo de mensagem ao solicitante Avisando sobre a necessidade de Briefing:">
             <img src="Imagem%2010.png" alt="Imagem 10"
                  onerror="this.onerror=null;this.src='Imagem%2010.jpg';this.onerror=function(){this.src='Imagem%2010.jpeg';}">
           </a>
-          <div class="cap">Imagem 10 — Exemplo: mensagem ao solicitante sobre necessidade de briefing</div>
+          <div class="cap">Exemplo de mensagem ao solicitante Avisando sobre a necessidade de Briefing:</div>
         </div>
 
+        <!-- Imagem 11 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2011.png" data-src="Imagem%2011.png" data-alt="Imagem 11" data-cap="Imagem 11 — Exemplo: notificação ao prestador para verificação de briefing">
+          <a class="zoom" href="Imagem%2011.png" data-src="Imagem%2011.png" data-alt="Imagem 11"
+             data-cap="Exemplo de notificação ao responsável da unidade para verificação da necessidade de briefing:">
             <img src="Imagem%2011.png" alt="Imagem 11"
                  onerror="this.onerror=null;this.src='Imagem%2011.jpg';this.onerror=function(){this.src='Imagem%2011.jpeg';}">
           </a>
-          <div class="cap">Imagem 11 — Exemplo: notificação ao prestador para verificação de briefing</div>
+          <div class="cap">Exemplo de notificação ao responsável da unidade para verificação da necessidade de briefing:</div>
         </div>
 
+        <!-- Imagem 12 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2012.png" data-src="Imagem%2012.png" data-alt="Imagem 12" data-cap="Imagem 12 — Exemplo: mensagem ao prestador para verificação de briefing">
+          <a class="zoom" href="Imagem%2012.png" data-src="Imagem%2012.png" data-alt="Imagem 12"
+             data-cap="Exemplo de mensagem ao responsável da unidade para verificação da necessidade de briefing:">
             <img src="Imagem%2012.png" alt="Imagem 12"
                  onerror="this.onerror=null;this.src='Imagem%2012.jpg';this.onerror=function(){this.src='Imagem%2012.jpeg';}">
           </a>
-          <div class="cap">Imagem 12 — Exemplo: mensagem ao prestador para verificação de briefing</div>
+          <div class="cap">Exemplo de mensagem ao responsável da unidade para verificação da necessidade de briefing:</div>
         </div>
 
+        <!-- Imagem 13 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2013.png" data-src="Imagem%2013.png" data-alt="Imagem 13" data-cap="Imagem 13 — Exemplo: fluxo no feed para verificação de briefing">
+          <a class="zoom" href="Imagem%2013.png" data-src="Imagem%2013.png" data-alt="Imagem 13"
+             data-cap="Exemplo de fluxo no Feed para verificação da necessidade de briefing:">
             <img src="Imagem%2013.png" alt="Imagem 13"
                  onerror="this.onerror=null;this.src='Imagem%2013.jpg';this.onerror=function(){this.src='Imagem%2013.jpeg';}">
           </a>
-          <div class="cap">Imagem 13 — Exemplo: fluxo no feed para verificação de briefing</div>
+          <div class="cap">Exemplo de fluxo no Feed para verificação da necessidade de briefing:</div>
         </div>
 
+        <!-- Imagem 14 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2014.png" data-src="Imagem%2014.png" data-alt="Imagem 14" data-cap="Imagem 14 — Exemplo: decisão de briefing (motivo obrigatório ao selecionar “PRECISA DE BRIEFING”)">
+          <a class="zoom" href="Imagem%2014.png" data-src="Imagem%2014.png" data-alt="Imagem 14"
+             data-cap="Exemplo da realização da decisão se precisa ou não de briefing(Observação: Ao clciar em &quot;PRECISA DE BRIEFING&quot; é obrigatorio informar o motivo pelo qual precisa, dessa forma o solicitante será informado e poderá se preparar para a reunião).">
             <img src="Imagem%2014.png" alt="Imagem 14"
                  onerror="this.onerror=null;this.src='Imagem%2014.jpg';this.onerror=function(){this.src='Imagem%2014.jpeg';}">
           </a>
-          <div class="cap">Imagem 14 — Exemplo: decisão de briefing (motivo obrigatório ao selecionar “PRECISA DE BRIEFING”)</div>
+          <div class="cap">Exemplo da realização da decisão se precisa ou não de briefing(Observação: Ao clciar em "PRECISA DE BRIEFING" é obrigatorio informar o motivo pelo qual precisa, dessa forma o solicitante será informado e poderá se preparar para a reunião).</div>
         </div>
 
+        <!-- Imagem 15 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2015.png" data-src="Imagem%2015.png" data-alt="Imagem 15" data-cap="Imagem 15 — Exemplo: notificação ao solicitante (briefing necessário)">
+          <a class="zoom" href="Imagem%2015.png" data-src="Imagem%2015.png" data-alt="Imagem 15"
+             data-cap="Exemplo de notificação ao solicitante caso exista a necessidade de briefing:">
             <img src="Imagem%2015.png" alt="Imagem 15"
                  onerror="this.onerror=null;this.src='Imagem%2015.jpg';this.onerror=function(){this.src='Imagem%2015.jpeg';}">
           </a>
-          <div class="cap">Imagem 15 — Exemplo: notificação ao solicitante (briefing necessário)</div>
+          <div class="cap">Exemplo de notificação ao solicitante caso exista a necessidade de briefing:</div>
         </div>
 
+        <!-- Imagem 16 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2016.png" data-src="Imagem%2016.png" data-alt="Imagem 16" data-cap="Imagem 16 — Exemplo: mensagem ao solicitante (briefing necessário)">
+          <a class="zoom" href="Imagem%2016.png" data-src="Imagem%2016.png" data-alt="Imagem 16"
+             data-cap="Exemplo de mensagem ao solicitante caso exista a necessidade de briefing:">
             <img src="Imagem%2016.png" alt="Imagem 16"
                  onerror="this.onerror=null;this.src='Imagem%2016.jpg';this.onerror=function(){this.src='Imagem%2016.jpeg';}">
           </a>
-          <div class="cap">Imagem 16 — Exemplo: mensagem ao solicitante (briefing necessário)</div>
+          <div class="cap">Exemplo de mensagem ao solicitante caso exista a necessidade de briefing:</div>
         </div>
       </div>
 
@@ -750,66 +765,77 @@
 
         <div class="h3">O que acontece</div>
         <div class="muted">
-          Após selecionar “PRECISA DE BRIEFING”, o fluxo é atualizado e passa a solicitar os dados da reunião.
-          O card permanece aguardando continuidade no Feed.
+          Após o clique em "PRECISA DE BRIEFING" a tela será atualizada para conter a pedida de dados para a reunião que será marcada e o fluxo irá se manter no feed para ser dada continuidade por parte do responsável da unidade prestadora.
         </div>
 
-        <div class="h3">Como prosseguir</div>
+        <div class="h3">Preenchimento obrigatório nesta etapa</div>
         <ul>
-          <li>Preencher <b>data/hora de início</b> e <b>data/hora de término</b>.</li>
-          <li>Selecionar <b>participantes</b>.</li>
-          <li>Informar <b>local</b> (recomendado: “Online” ou “Presencial”).</li>
-          <li>Clicar em <b>MARCAR REUNIÃO</b>.</li>
+          <li>Data e hora do início da reunião</li>
+          <li>Data e hora de termino da reunião</li>
+          <li>Participantes</li>
+          <li>Local da reunião</li>
         </ul>
 
         <div class="note">
-          <b>Importante:</b> o campo de local é ilustrativo e não sincroniza automaticamente com reservas de sala.
-          Se presencial, reserve a sala manualmente após marcar a reunião.
+          (Atenção ao local da reunião pois não está sincronizado com os locais utilizados comumente por todos, sendo assim, somente após marcar a reunião, poderá selecionar no calendário a reserva de uma sala. Ou seja o campo é meramente ilustrativo, recomendamos escrever sempre "Online" ou "Presencial" e posterior a marcação, realizar manualmente a reserva da sala)
         </div>
 
+        <div class="muted" style="margin-top:10px;">Após isso, clicar em <b>"MARCAR REUNIÃO"</b></div>
+
+        <div class="note">
+          Após a tela irá atualizar, mas nesse momento você não terá ainda as informações para serem inseridas, sendo assim, pode fechar o fluxo até que as consiga.
+        </div>
+
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 17 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2017.png" data-src="Imagem%2017.png" data-alt="Imagem 17" data-cap="Imagem 17 — Exemplo: fluxo ainda no feed após selecionar “PRECISA DE BRIEFING”">
+          <a class="zoom" href="Imagem%2017.png" data-src="Imagem%2017.png" data-alt="Imagem 17"
+             data-cap="Exemplo de fluxo ainda no feed:">
             <img src="Imagem%2017.png" alt="Imagem 17"
                  onerror="this.onerror=null;this.src='Imagem%2017.jpg';this.onerror=function(){this.src='Imagem%2017.jpeg';}">
           </a>
-          <div class="cap">Imagem 17 — Exemplo: fluxo ainda no feed após selecionar “PRECISA DE BRIEFING”</div>
+          <div class="cap">Exemplo de fluxo ainda no feed:</div>
         </div>
 
+        <!-- Imagem 18 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2018.png" data-src="Imagem%2018.png" data-alt="Imagem 18" data-cap="Imagem 18 — Exemplo: tela do fluxo atualizada para marcar reunião">
+          <a class="zoom" href="Imagem%2018.png" data-src="Imagem%2018.png" data-alt="Imagem 18"
+             data-cap="Exemplo de tela do fluco atualizada para conter informações da reunião que será marcada:">
             <img src="Imagem%2018.png" alt="Imagem 18"
                  onerror="this.onerror=null;this.src='Imagem%2018.jpg';this.onerror=function(){this.src='Imagem%2018.jpeg';}">
           </a>
-          <div class="cap">Imagem 18 — Exemplo: tela do fluxo atualizada para marcar reunião</div>
+          <div class="cap">Exemplo de tela do fluco atualizada para conter informações da reunião que será marcada:</div>
         </div>
 
+        <!-- Imagem 19 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2019.png" data-src="Imagem%2019.png" data-alt="Imagem 19" data-cap="Imagem 19 — Exemplo: notificação ao solicitante com dados da reunião">
+          <a class="zoom" href="Imagem%2019.png" data-src="Imagem%2019.png" data-alt="Imagem 19"
+             data-cap="Exemplo de notificação enviada ao solicitante a respeito da marcação da reunião e contendo seus dados:">
             <img src="Imagem%2019.png" alt="Imagem 19"
                  onerror="this.onerror=null;this.src='Imagem%2019.jpg';this.onerror=function(){this.src='Imagem%2019.jpeg';}">
           </a>
-          <div class="cap">Imagem 19 — Exemplo: notificação ao solicitante com dados da reunião</div>
+          <div class="cap">Exemplo de notificação enviada ao solicitante a respeito da marcação da reunião e contendo seus dados:</div>
         </div>
 
+        <!-- Imagem 20 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2020.png" data-src="Imagem%2020.png" data-alt="Imagem 20" data-cap="Imagem 20 — Exemplo: mensagem ao solicitante com dados da reunião">
+          <a class="zoom" href="Imagem%2020.png" data-src="Imagem%2020.png" data-alt="Imagem 20"
+             data-cap="Exemplo de mensagem enviada ao solicitante a respeito da marcação da reunião e contendo seus dados:">
             <img src="Imagem%2020.png" alt="Imagem 20"
                  onerror="this.onerror=null;this.src='Imagem%2020.jpg';this.onerror=function(){this.src='Imagem%2020.jpeg';}">
           </a>
-          <div class="cap">Imagem 20 — Exemplo: mensagem ao solicitante com dados da reunião</div>
+          <div class="cap">Exemplo de mensagem enviada ao solicitante a respeito da marcação da reunião e contendo seus dados:</div>
         </div>
 
+        <!-- Imagem 21 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2021.png" data-src="Imagem%2021.png" data-alt="Imagem 21" data-cap="Imagem 21 — Exemplo: reunião criada para tratar do briefing">
+          <a class="zoom" href="Imagem%2021.png" data-src="Imagem%2021.png" data-alt="Imagem 21"
+             data-cap="Exemplo de reunião criada para tratar do briefing da OS em questão:">
             <img src="Imagem%2021.png" alt="Imagem 21"
                  onerror="this.onerror=null;this.src='Imagem%2021.jpg';this.onerror=function(){this.src='Imagem%2021.jpeg';}">
           </a>
-          <div class="cap">Imagem 21 — Exemplo: reunião criada para tratar do briefing</div>
-        </div>
-
-        <div class="note">
-          Após marcar, a tela pode atualizar para uma próxima etapa que depende de informações que você só terá após a reunião.
-          Você pode fechar o fluxo e retornar depois.
+          <div class="cap">Exemplo de reunião criada para tratar do briefing da OS em questão:</div>
         </div>
       </div>
 
@@ -819,113 +845,125 @@
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
           <span class="pill"><b>Entrada:</b> Briefing realizado</span>
-          <span class="pill"><b>Saída:</b> Orçamento gerado</span>
+          <span class="pill"><b>Saída:</b> Orçamento gerado e enviado</span>
         </div>
 
         <div class="h3">O que acontece</div>
         <div class="muted">
-          O responsável da unidade prestadora recebe notificação/mensagem para preencher dados que permitirão gerar o orçamento.
-          O orçamento é então enviado ao responsável da unidade solicitante para aprovação/recusa.
+          Agora voltando a atualização da tela, onde pedirá informações que você só terá após a reunião, junto, o responsável da unidade receberá notificação e mensagem, informando que para confecção do orçamento, precisa preencher algumas informações.
         </div>
 
-        <div class="h3">Como preencher (critérios)</div>
+        <div class="h3">Critérios de preenchimento (campos)</div>
         <ul>
-          <li><b>Executor(es):</b> quem executará a OS.</li>
-          <li><b>Data de conclusão:</b> prazo <b>realista</b> (data e hora), mesmo que diferente da expectativa do solicitante.</li>
-          <li><b>Produto:</b> selecione se existir 1 produto mapeado.</li>
-          <li><b>Produto personalizado:</b> se houver múltiplos produtos, deixe “Produto” em branco e liste todos aqui.</li>
-          <li><b>Valor:</b> total final da OS.</li>
-          <li><b>Detalhes dos entregáveis:</b> detalhamento completo, produtos, quantidades e composição dos valores.</li>
+          <li>Informar quem será/ão o/os executor/es da OS</li>
+          <li>Informar a data de conclusão (prazo realista: data e hora)</li>
+          <li>Se houver lista de produtos mapeada e for apenas 1 produto: selecione o produto</li>
+          <li>Se precisar de mais de 1 produto: deixar o campo de produto em branco e informar em "Produto personalizado" a lista de produtos</li>
+          <li>No campo valor: informar o valor total(final) da OS</li>
+          <li>Em detalhes dos entregáveis: detalhamento do serviço/produtos, quantidades e descritivo dos valores envolvidos</li>
         </ul>
 
-        <div class="h3">Como prosseguir</div>
-        <div class="muted">Após preencher, clicar em <b>Atribuir detalhes</b>.</div>
+        <div class="note">
+          Ao clicar em <b>"Atribuir detalhes"</b> a ferramenta irá gerar o orçamento e enviar para o responsável pela unidade de negócio solicitante para que seja aprovado ou recusado o orçamento.
+        </div>
 
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 22 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2022.png" data-src="Imagem%2022.png" data-alt="Imagem 22" data-cap="Imagem 22 — Exemplo: notificação ao prestador para inserir informações do orçamento">
+          <a class="zoom" href="Imagem%2022.png" data-src="Imagem%2022.png" data-alt="Imagem 22"
+             data-cap="Exemplo de notificação ao responsável da unidade prestadora para inserção das informações referentes ao orçamento no fluxo:">
             <img src="Imagem%2022.png" alt="Imagem 22"
                  onerror="this.onerror=null;this.src='Imagem%2022.jpg';this.onerror=function(){this.src='Imagem%2022.jpeg';}">
           </a>
-          <div class="cap">Imagem 22 — Exemplo: notificação ao prestador para inserir informações do orçamento</div>
+          <div class="cap">Exemplo de notificação ao responsável da unidade prestadora para inserção das informações referentes ao orçamento no fluxo:</div>
         </div>
 
+        <!-- Imagem 23 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2023.png" data-src="Imagem%2023.png" data-alt="Imagem 23" data-cap="Imagem 23 — Exemplo: mensagem ao prestador para inserir informações do orçamento">
+          <a class="zoom" href="Imagem%2023.png" data-src="Imagem%2023.png" data-alt="Imagem 23"
+             data-cap="Exemplo de mensagem ao responsável da unidade prestadora para inserção das informações referentes ao orçamento no fluxo:">
             <img src="Imagem%2023.png" alt="Imagem 23"
                  onerror="this.onerror=null;this.src='Imagem%2023.jpg';this.onerror=function(){this.src='Imagem%2023.jpeg';}">
           </a>
-          <div class="cap">Imagem 23 — Exemplo: mensagem ao prestador para inserir informações do orçamento</div>
+          <div class="cap">Exemplo de mensagem ao responsável da unidade prestadora para inserção das informações referentes ao orçamento no fluxo:</div>
         </div>
 
+        <!-- Imagem 24 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2024.png" data-src="Imagem%2024.png" data-alt="Imagem 24" data-cap="Imagem 24 — Exemplo: fluxo no feed aguardando preenchimento do orçamento">
+          <a class="zoom" href="Imagem%2024.png" data-src="Imagem%2024.png" data-alt="Imagem 24"
+             data-cap="Exemplo de fluxo no feed para preenchimento das informações referentes ao orçamento que será gerado:">
             <img src="Imagem%2024.png" alt="Imagem 24"
                  onerror="this.onerror=null;this.src='Imagem%2024.jpg';this.onerror=function(){this.src='Imagem%2024.jpeg';}">
           </a>
-          <div class="cap">Imagem 24 — Exemplo: fluxo no feed aguardando preenchimento do orçamento</div>
+          <div class="cap">Exemplo de fluxo no feed para preenchimento das informações referentes ao orçamento que será gerado:</div>
         </div>
 
+        <!-- Imagem 25 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2025.png" data-src="Imagem%2025.png" data-alt="Imagem 25" data-cap="Imagem 25 — Exemplo: tela para preenchimento do orçamento">
+          <a class="zoom" href="Imagem%2025.png" data-src="Imagem%2025.png" data-alt="Imagem 25"
+             data-cap="Exemplo da tela aberta do fluxo no feed para preenchimento das informações referentes ao orçamento que será gerado:">
             <img src="Imagem%2025.png" alt="Imagem 25"
                  onerror="this.onerror=null;this.src='Imagem%2025.jpg';this.onerror=function(){this.src='Imagem%2025.jpeg';}">
           </a>
-          <div class="cap">Imagem 25 — Exemplo: tela para preenchimento do orçamento</div>
+          <div class="cap">Exemplo da tela aberta do fluxo no feed para preenchimento das informações referentes ao orçamento que será gerado:</div>
         </div>
       </div>
 
       <!-- ETAPA 7 -->
       <div class="card" id="etapa-7">
-        <div class="h2">Etapa 7 — Aprovação/recusa do orçamento (Responsável da unidade solicitante)</div>
+        <div class="h2">Etapa 7 — Aprovação ou recusa do orçamento (Responsável da unidade solicitante)</div>
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Unidade Solicitante (responsável)</span>
-          <span class="pill"><b>Ação:</b> Aprovar ou recusar</span>
-          <span class="pill"><b>Saída:</b> Aprovado ou devolvido para nova proposta</span>
+          <span class="pill"><b>Ação:</b> Aprovar ou recusar orçamento</span>
+          <span class="pill"><b>Saída:</b> Orçamento aprovado ou recusado</span>
         </div>
 
-        <div class="h3">O que acontece</div>
-        <div class="muted">
-          O responsável pela unidade solicitante recebe o orçamento e decide aprovar ou recusar.
-          Em caso de recusa, é obrigatório informar o motivo.
+        <div class="h3">Regra crítica</div>
+        <div class="note">
+          Atenção a obrigatoriedade de preenchimento do campo <b>"Por qual motivo está recusando?"</b> caso seja necessário realizar uma recusa!
         </div>
 
-        <div class="h3">Como prosseguir</div>
-        <ul>
-          <li>Revisar valor, prazos, entregáveis e condições.</li>
-          <li>Selecionar <b>Aprovar</b> ou <b>Recusar</b>.</li>
-          <li><b>Se recusar:</b> preencher obrigatoriamente “Por qual motivo está recusando?”.</li>
-        </ul>
+        <div class="h3">Evidências (exemplos)</div>
 
+        <!-- Imagem 26 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2026.png" data-src="Imagem%2026.png" data-alt="Imagem 26" data-cap="Imagem 26 — Exemplo: notificação ao responsável solicitante para aprovação do orçamento">
+          <a class="zoom" href="Imagem%2026.png" data-src="Imagem%2026.png" data-alt="Imagem 26"
+             data-cap="Exemplo de notificação enviada ao responsável pela unidade de negócio solicitante para aprovação do orçamento:">
             <img src="Imagem%2026.png" alt="Imagem 26"
                  onerror="this.onerror=null;this.src='Imagem%2026.jpg';this.onerror=function(){this.src='Imagem%2026.jpeg';}">
           </a>
-          <div class="cap">Imagem 26 — Exemplo: notificação ao responsável solicitante para aprovação do orçamento</div>
+          <div class="cap">Exemplo de notificação enviada ao responsável pela unidade de negócio solicitante para aprovação do orçamento:</div>
         </div>
 
+        <!-- Imagem 27 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2027.png" data-src="Imagem%2027.png" data-alt="Imagem 27" data-cap="Imagem 27 — Exemplo: mensagem ao responsável solicitante para aprovação do orçamento">
+          <a class="zoom" href="Imagem%2027.png" data-src="Imagem%2027.png" data-alt="Imagem 27"
+             data-cap="Exemplo de mensagem enviada ao responsável pela unidade de negócio solicitante para aprovação do orçamento:">
             <img src="Imagem%2027.png" alt="Imagem 27"
                  onerror="this.onerror=null;this.src='Imagem%2027.jpg';this.onerror=function(){this.src='Imagem%2027.jpeg';}">
           </a>
-          <div class="cap">Imagem 27 — Exemplo: mensagem ao responsável solicitante para aprovação do orçamento</div>
+          <div class="cap">Exemplo de mensagem enviada ao responsável pela unidade de negócio solicitante para aprovação do orçamento:</div>
         </div>
 
+        <!-- Imagem 28 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2028.png" data-src="Imagem%2028.png" data-alt="Imagem 28" data-cap="Imagem 28 — Exemplo: fluxo no feed para aprovação/recusa do orçamento">
+          <a class="zoom" href="Imagem%2028.png" data-src="Imagem%2028.png" data-alt="Imagem 28"
+             data-cap="Exemplo de fluxo no feed para aprovação ou recusa de orçamento por parte do responsável da unidade de negócio solicitante:">
             <img src="Imagem%2028.png" alt="Imagem 28"
                  onerror="this.onerror=null;this.src='Imagem%2028.jpg';this.onerror=function(){this.src='Imagem%2028.jpeg';}">
           </a>
-          <div class="cap">Imagem 28 — Exemplo: fluxo no feed para aprovação/recusa do orçamento</div>
+          <div class="cap">Exemplo de fluxo no feed para aprovação ou recusa de orçamento por parte do responsável da unidade de negócio solicitante:</div>
         </div>
 
+        <!-- Imagem 29 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2029.png" data-src="Imagem%2029.png" data-alt="Imagem 29" data-cap="Imagem 29 — Exemplo: tela de aprovação/recusa (motivo obrigatório em recusa)">
+          <a class="zoom" href="Imagem%2029.png" data-src="Imagem%2029.png" data-alt="Imagem 29"
+             data-cap="Exemplo de tela para aprovação ou recusa do orçamento por parte do responsável da unidade de negócio solicitante:">
             <img src="Imagem%2029.png" alt="Imagem 29"
                  onerror="this.onerror=null;this.src='Imagem%2029.jpg';this.onerror=function(){this.src='Imagem%2029.jpeg';}">
           </a>
-          <div class="cap">Imagem 29 — Exemplo: tela de aprovação/recusa (motivo obrigatório em recusa)</div>
+          <div class="cap">Exemplo de tela para aprovação ou recusa do orçamento por parte do responsável da unidade de negócio solicitante:</div>
         </div>
       </div>
 
@@ -935,123 +973,143 @@
         <div class="step-meta">
           <span class="pill"><b>Papel:</b> Unidade Prestadora</span>
           <span class="pill"><b>Entrada:</b> Orçamento recusado</span>
-          <span class="pill"><b>Saída:</b> Nova proposta enviada ou negociação cancelada</span>
+          <span class="pill"><b>Saídas possíveis:</b> Nova proposta enviada ou negociação cancelada</span>
         </div>
 
-        <div class="h3">O que acontece</div>
-        <div class="muted">
-          Se houver recusa, a unidade prestadora recebe os detalhes e pode:
-          (1) enviar nova proposta; ou (2) cancelar a negociação.
-        </div>
-
+        <div class="h3">Regra crítica da nova proposta</div>
         <div class="note">
-          <b>Obrigatório ao reenviar:</b> preencher “Explique quais foram as mudanças na sua proposta!”.
-          O sistema reprocesa e volta ao fluxo de aprovação do solicitante.
+          Nesta etapa, caso deseje enviar uma nova proposta, atenção ao campo <b>"Explique quais foram as mudanças na sua proposta!"</b> que é obrigatório ser preenchido ao enviar uma nova proposta.
         </div>
 
+        <div class="muted">
+          Ao prosseguir com o envio de uma nova proposta, o sistema irá reprocessar o orçamento e retornará ao envio de mensagens de aprovação assim como fluxo de aprovação.
+        </div>
+
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 30 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2030.png" data-src="Imagem%2030.png" data-alt="Imagem 30" data-cap="Imagem 30 — Exemplo: notificação de recusa para a unidade prestadora">
+          <a class="zoom" href="Imagem%2030.png" data-src="Imagem%2030.png" data-alt="Imagem 30"
+             data-cap="Exemplo de notificação de recusa para o responsável da unidade de negócio prestadora:">
             <img src="Imagem%2030.png" alt="Imagem 30"
                  onerror="this.onerror=null;this.src='Imagem%2030.jpg';this.onerror=function(){this.src='Imagem%2030.jpeg';}">
           </a>
-          <div class="cap">Imagem 30 — Exemplo: notificação de recusa para a unidade prestadora</div>
+          <div class="cap">Exemplo de notificação de recusa para o responsável da unidade de negócio prestadora:</div>
         </div>
 
+        <!-- Imagem 31 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2031.png" data-src="Imagem%2031.png" data-alt="Imagem 31" data-cap="Imagem 31 — Exemplo: mensagem de recusa para a unidade prestadora">
+          <a class="zoom" href="Imagem%2031.png" data-src="Imagem%2031.png" data-alt="Imagem 31"
+             data-cap="Exemplo de mensagem de recusa para o responsável da unidade de negócio prestadora:">
             <img src="Imagem%2031.png" alt="Imagem 31"
                  onerror="this.onerror=null;this.src='Imagem%2031.jpg';this.onerror=function(){this.src='Imagem%2031.jpeg';}">
           </a>
-          <div class="cap">Imagem 31 — Exemplo: mensagem de recusa para a unidade prestadora</div>
+          <div class="cap">Exemplo de mensagem de recusa para o responsável da unidade de negócio prestadora:</div>
         </div>
 
+        <!-- Imagem 32 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2032.png" data-src="Imagem%2032.png" data-alt="Imagem 32" data-cap="Imagem 32 — Exemplo: fluxo no feed para envio de nova proposta">
+          <a class="zoom" href="Imagem%2032.png" data-src="Imagem%2032.png" data-alt="Imagem 32"
+             data-cap="Exemplo de fluxo via feed para realizar o envio de uma nova proposta de orçamento:">
             <img src="Imagem%2032.png" alt="Imagem 32"
                  onerror="this.onerror=null;this.src='Imagem%2032.jpg';this.onerror=function(){this.src='Imagem%2032.jpeg';}">
           </a>
-          <div class="cap">Imagem 32 — Exemplo: fluxo no feed para envio de nova proposta</div>
+          <div class="cap">Exemplo de fluxo via feed para realizar o envio de uma nova proposta de orçamento:</div>
         </div>
 
+        <!-- Imagem 33 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2033.png" data-src="Imagem%2033.png" data-alt="Imagem 33" data-cap="Imagem 33 — Exemplo: tela para ajustar proposta e reenviar orçamento (mudanças obrigatórias)">
+          <a class="zoom" href="Imagem%2033.png" data-src="Imagem%2033.png" data-alt="Imagem 33"
+             data-cap="Exemplo de tela para introdução/mudança de informações de proposta para envio de novo orçamento:">
             <img src="Imagem%2033.png" alt="Imagem 33"
                  onerror="this.onerror=null;this.src='Imagem%2033.jpg';this.onerror=function(){this.src='Imagem%2033.jpeg';}">
           </a>
-          <div class="cap">Imagem 33 — Exemplo: tela para ajustar proposta e reenviar orçamento (mudanças obrigatórias)</div>
+          <div class="cap">Exemplo de tela para introdução/mudança de informações de proposta para envio de novo orçamento:</div>
         </div>
 
+        <!-- Imagem 34 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2034.png" data-src="Imagem%2034.png" data-alt="Imagem 34" data-cap="Imagem 34 — Exemplo: orçamento gerado após reprocessamento">
+          <a class="zoom" href="Imagem%2034.png" data-src="Imagem%2034.png" data-alt="Imagem 34"
+             data-cap="Exemplo de orçamento gerado:">
             <img src="Imagem%2034.png" alt="Imagem 34"
                  onerror="this.onerror=null;this.src='Imagem%2034.jpg';this.onerror=function(){this.src='Imagem%2034.jpeg';}">
           </a>
-          <div class="cap">Imagem 34 — Exemplo: orçamento gerado após reprocessamento</div>
+          <div class="cap">Exemplo de orçamento gerado:</div>
         </div>
       </div>
 
       <!-- ETAPA 9 -->
       <div class="card" id="etapa-9">
-        <div class="h2">Etapa 9 — Aprovação final e encerramento do fluxo</div>
+        <div class="h2">Etapa 9 — Aprovação final e autorização de execução</div>
         <div class="step-meta">
-          <span class="pill"><b>Papel:</b> Unidade Solicitante / Prestadora</span>
+          <span class="pill"><b>Papel:</b> Unidade Solicitante (responsável) / Unidade Prestadora</span>
           <span class="pill"><b>Marco:</b> Orçamento aprovado</span>
           <span class="pill"><b>Saída:</b> Execução autorizada</span>
         </div>
 
-        <div class="h3">O que acontece</div>
         <div class="muted">
-          Quando o orçamento é aprovado, a unidade prestadora recebe aviso de aprovação.
-          O fluxo de abertura da OS é encerrado e a execução passa a ser permitida.
+          Caso a OS seja aprovada pelo responsável da unidade de negócio solicitante o responsável pela unidade prestadora receberá uma mensagem/notificação avisando da aprovação.
         </div>
 
-        <div class="note">
-          <b>Regra:</b> criação de tarefas e execução da OS <b>somente após aprovação do orçamento final</b>.
-        </div>
+        <div class="h3">Evidências (exemplos)</div>
 
+        <!-- Imagem 35 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2035.png" data-src="Imagem%2035.png" data-alt="Imagem 35" data-cap="Imagem 35 — Exemplo: notificação ao prestador informando aprovação">
+          <a class="zoom" href="Imagem%2035.png" data-src="Imagem%2035.png" data-alt="Imagem 35"
+             data-cap="Exemplo de notificação de aviso da aprovação ao responsável pela unidade prestadora:">
             <img src="Imagem%2035.png" alt="Imagem 35"
                  onerror="this.onerror=null;this.src='Imagem%2035.jpg';this.onerror=function(){this.src='Imagem%2035.jpeg';}">
           </a>
-          <div class="cap">Imagem 35 — Exemplo: notificação ao prestador informando aprovação</div>
+          <div class="cap">Exemplo de notificação de aviso da aprovação ao responsável pela unidade prestadora:</div>
         </div>
 
+        <!-- Imagem 36 -->
         <div class="imgbox">
-          <a class="zoom" href="Imagem%2036.png" data-src="Imagem%2036.png" data-alt="Imagem 36" data-cap="Imagem 36 — Exemplo: mensagem ao prestador informando aprovação">
+          <a class="zoom" href="Imagem%2036.png" data-src="Imagem%2036.png" data-alt="Imagem 36"
+             data-cap="Exemplo de mensagem de aviso da aprovação ao responsável pela unidade prestadora:">
             <img src="Imagem%2036.png" alt="Imagem 36"
                  onerror="this.onerror=null;this.src='Imagem%2036.jpg';this.onerror=function(){this.src='Imagem%2036.jpeg';}">
           </a>
-          <div class="cap">Imagem 36 — Exemplo: mensagem ao prestador informando aprovação</div>
-        </div>
-
-        <div class="imgbox">
-          <a class="zoom" href="Imagem%2037.png" data-src="Imagem%2037.png" data-alt="Imagem 37" data-cap="Imagem 37 — Exemplo: card após criação/andamento (dados e comentários para leitura rápida)">
-            <img src="Imagem%2037.png" alt="Imagem 37"
-                 onerror="this.onerror=null;this.src='Imagem%2037.jpg';this.onerror=function(){this.src='Imagem%2037.jpeg';}">
-          </a>
-          <div class="cap">Imagem 37 — Exemplo: card após criação/andamento (dados e comentários para leitura rápida)</div>
+          <div class="cap">Exemplo de mensagem de aviso da aprovação ao responsável pela unidade prestadora:</div>
         </div>
       </div>
 
-      <!-- IDENTIFICAÇÃO -->
-      <div class="card" id="identificacao">
-        <div class="h2">Identificação do título da OS (marcadores)</div>
-        <div class="muted">O título possui um padrão para facilitar busca e organização.</div>
+      <!-- INFORMAÇÕES GERAIS -->
+      <div class="card" id="informacoes-gerais">
+        <div class="h2">Informações gerais do fluxo</div>
+
+        <div class="h3">Padrão do título da OS (marcadores)</div>
+        <div class="muted">
+          O título da OS, agora conta com marcadores para melhor procura/organização:
+          Utilizando o exemplo: <b>OSUE200126BTQ649CAG</b>
+        </div>
 
         <div class="note" style="font-family:Consolas, Monaco, monospace;">
-          Exemplo: <b>OSUE200126BTQ649CAG</b><br>
-          OS = Ordem de Serviço<br>
-          U = Tipo de serviço (Urgente)<br>
-          E = Tipo de OS (Externa)<br>
-          200126 = Data de abertura (20/01/2026)<br>
-          BTQ = Unidade solicitante (Boutique)<br>
-          649 = ID da SPA<br>
-          CAG = Unidade prestadora (Comuniq AG)
+          OS: Ordem de Serviço<br>
+          U: Tipo de serviço - Urgênte<br>
+          E: Tipo de OS - Externa<br>
+          200126: Data de abertura - 20/01/2026<br>
+          BTQ: Unidade solicitante - Boutique<br>
+          649: Id da SPA - 649<br>
+          CAG: Unidade prestadora - Comuniq AG
         </div>
 
         <div class="muted" style="margin-top:10px;">
-          Há apenas <b>uma SPA</b> para unificar todas as OS. Usuários autorizados podem filtrar por título e visualizar itens específicos por unidade.
+          Teremos apenas uma SPA que unirá todas as OS, sendo possível realizar um filtro por parte dos usuários selecionados para visualização geral e visualização dos itens específicos de cada unidade.
+          Nos dados da SPA, teremos todos os dados, assim como nos fluxos de aprovação.
+          Atenção a campos como Dados da OS e comentários no feed do card, estes, foram criados para facilitar a leitura dos campos de Objetivo, Justificativa e Descrição.
+        </div>
+
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 37 -->
+        <div class="imgbox">
+          <a class="zoom" href="Imagem%2037.png" data-src="Imagem%2037.png" data-alt="Imagem 37"
+             data-cap="Exemplo de card após criação:">
+            <img src="Imagem%2037.png" alt="Imagem 37"
+                 onerror="this.onerror=null;this.src='Imagem%2037.jpg';this.onerror=function(){this.src='Imagem%2037.jpeg';}">
+          </a>
+          <div class="cap">Exemplo de card após criação:</div>
         </div>
       </div>
 
@@ -1059,20 +1117,24 @@
       <div class="callout-err" id="regras">
         <div class="h2">Regras críticas e governança do processo</div>
         <ul>
-          <li>O fluxo completo só termina após <b>aprovação do orçamento</b> ou <b>cancelamento da negociação</b> pela unidade prestadora.</li>
-          <li>Cada etapa ocorre de forma automática — é <b>terminantemente proibido</b> mover o card manualmente na SPA antes de “Orçamento aprovado”.</li>
-          <li>A execução da OS e criação de tarefas só devem ocorrer <b>após aprovação do orçamento final</b>.</li>
-          <li>O processo não pode ser pausado, retrocedido ou reiniciado. Máxima atenção ao preenchimento dos campos.</li>
-          <li>Pontos de decisão no Feed aguardam ação por até <b>7 dias</b>. Sem ação, o fluxo segue com negativa por falta de interação.</li>
-          <li>Se perder o rastreio, filtre pelo <b>título da OS</b> e verifique decisões pendentes no Feed.</li>
+          <li>Atenção ao fluxo completo, ele só termina após o orçamento obter uma aprovação por parte do responsável da unidade prestadora ou um cancelamento da negociação por parte do responsável pela unidade prestadora.</li>
+          <li>Cada etapa acontece de forma automática, sendo terminantemente proibído realizar ações de movimentação de card manual na SPA antes da chegada a etapa de "Orçamento aprovado".</li>
+          <li>Atenção ao fluxo, a execução da OS, bem como a criação de uma tarefa, só deve ser feita após a obtenção da aprovação do orçamento final.</li>
+          <li>Máxima atenção ao preenchimento de todos os campos, pois o processo não pode ser pausado, retrocedido ou reiniciado!</li>
+          <li>Atenção aos pontos de decisão (Fluxos de feed que dependem de ações dos responsáveis das unidades), estes, só aguardam por 7 dias uma ação, caso não seja realizada nenhuma ação, o fluxo seguirá em frente com a negativa do processo por falta de interação.</li>
+          <li>Atenção: caso perca o rastreio do processo no feed, há a possibilidade de filtrar pelo título da OS e verificar se há algum ponto de decisão aguardando sua ação no feed:</li>
         </ul>
 
+        <div class="h3">Evidências (exemplos)</div>
+
+        <!-- Imagem 38 -->
         <div class="imgbox" style="border-color:#FCA5A5;background:#fff;">
-          <a class="zoom" href="Imagem%2038.png" data-src="Imagem%2038.png" data-alt="Imagem 38" data-cap="Imagem 38 — Exemplo: filtro no feed pelo título da OS para localizar pontos de decisão">
+          <a class="zoom" href="Imagem%2038.png" data-src="Imagem%2038.png" data-alt="Imagem 38"
+             data-cap="Exemplo de filtro no feed:">
             <img src="Imagem%2038.png" alt="Imagem 38"
                  onerror="this.onerror=null;this.src='Imagem%2038.jpg';this.onerror=function(){this.src='Imagem%2038.jpeg';}">
           </a>
-          <div class="cap">Imagem 38 — Exemplo: filtro no feed pelo título da OS para localizar pontos de decisão</div>
+          <div class="cap">Exemplo de filtro no feed:</div>
         </div>
       </div>
 
